@@ -63,7 +63,6 @@ export function Shortcuts() {
           case "a": router.push("/about"); break;
           case "c": router.push("/contact"); break;
           case "j": router.push("/journey"); break;
-          case "m": router.push("/music"); break;
         }
       }
     };
@@ -105,10 +104,6 @@ export function Shortcuts() {
           <StaggerItem className="grid grid-cols-[100px_1fr] gap-4 items-center">
             <div><kbd className="border border-[var(--rule)] px-2 py-1">G</kbd> <kbd className="border border-[var(--rule)] px-2 py-1">J</kbd></div>
             <div className="text-[var(--muted)]">Journey</div>
-          </StaggerItem>
-          <StaggerItem className="grid grid-cols-[100px_1fr] gap-4 items-center">
-            <div><kbd className="border border-[var(--rule)] px-2 py-1">G</kbd> <kbd className="border border-[var(--rule)] px-2 py-1">M</kbd></div>
-            <div className="text-[var(--muted)]">Music</div>
           </StaggerItem>
           <StaggerItem className="grid grid-cols-[100px_1fr] gap-4 items-center">
             <div><kbd className="border border-[var(--rule)] px-2 py-1">T</kbd></div>

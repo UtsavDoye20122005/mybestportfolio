@@ -58,7 +58,7 @@ const educationHighlights = [
 ];
 
 const skillGroups: SkillGroup[] = [
-  { label: "Programming Languages", value: "Python, HTML, CSS" },
+  { label: "Programming Languages", value: "Python, HTML, CSS, JavaScript, ReactJS, Tailwind CSS" },
   {
     label: "Core Competencies",
     value: "Algorithm Design, Data Processing, Web Development, Problem Solving",
@@ -236,7 +236,7 @@ export default function ResumePage() {
             <p className="mt-6 max-w-3xl font-mono text-sm leading-7 text-[var(--muted)]">
               Motivated first-year BTech student with strong analytical skills and
               passion for leveraging technology to solve real-world problems.
-              Proficient in Python, HTML, and CSS with hands-on experience in
+              Proficient in Python, HTML, JavaScript, CSS, Tailwind CSS and ReactJS with hands-on experience in
               building functional applications. Demonstrated ability to learn
               rapidly, collaborate effectively, and deliver results in dynamic
               environments.

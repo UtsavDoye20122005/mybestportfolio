@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { AvailabilityBadge } from "./components/AvailabilityBadge";
 import { InteractiveGame } from "./components/InteractiveGame";
-import { PlaylistCatalog } from "./components/PlaylistCatalog";
 import { ByTheNumbers } from "./components/ByTheNumbers";
 import { VisitorCounter } from "./components/VisitorCounter";
 import { changelog } from "../data/changelog";
@@ -89,7 +88,6 @@ export default function Home() {
 
       <TerminalSection />
       <InteractiveGame />
-      <PlaylistCatalog condensed />
       
       <ByTheNumbers />
 
@@ -101,7 +99,6 @@ export default function Home() {
                 FULL STACK DEVELOPER <span className="ticker__dot">·</span> PHYSICS{" "}
                 <span className="ticker__dot">·</span> FINANCE{" "}
                 <span className="ticker__dot">·</span> AI AUTOMATION{" "}
-                <span className="ticker__dot">·</span> MUSIC{" "}
                 <span className="ticker__dot">·</span> MARKETS{" "}
                 <span className="ticker__dot">·</span> SYSTEMS THINKER{" "}
                 <span className="ticker__dot">·</span>{" "}
@@ -110,7 +107,6 @@ export default function Home() {
                 FULL STACK DEVELOPER <span className="ticker__dot">·</span> PHYSICS{" "}
                 <span className="ticker__dot">·</span> FINANCE{" "}
                 <span className="ticker__dot">·</span> AI AUTOMATION{" "}
-                <span className="ticker__dot">·</span> MUSIC{" "}
                 <span className="ticker__dot">·</span> MARKETS{" "}
                 <span className="ticker__dot">·</span> SYSTEMS THINKER{" "}
                 <span className="ticker__dot">·</span>{" "}
