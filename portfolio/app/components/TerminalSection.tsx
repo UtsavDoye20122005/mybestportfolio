@@ -95,6 +95,8 @@ export function TerminalSection() {
     };
   }, []);
 
+  const nextId = useRef(1000);
+
   useEffect(() => {
     // Keep output scrolled to bottom.
     const el = outputRef.current;
@@ -107,7 +109,6 @@ export function TerminalSection() {
     const lower = input.toLowerCase();
     const [cmd] = lower.split(/\s+/);
 
-    const nextId = useRef(1000);
     const push = (next: Omit<Line, "id">[]) =>
       setLines((prev) => [
         ...prev,
