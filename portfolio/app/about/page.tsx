@@ -16,11 +16,22 @@ const TechRadar = dynamic(
 );
 
 const stackRows = [
-  { label: "LANGUAGES", value: "C/C++, Python, JavaScript, TypeScript, SQL" },
-  { label: "FRONTEND", value: "Next.js, React.js, Tailwind CSS" },
-  { label: "BACKEND", value: "Node.js, Express.js" },
-  { label: "DATABASE", value: "PostgreSQL, MongoDB" },
-  { label: "TOOLS", value: "Docker, Git, Postman" },
+  {
+    label: "Programming Languages",
+    value: "Python, HTML, CSS, JavaScript, TypeScript",
+  },
+  {
+    label: "Frontend",
+    value: "Next.js, React.js, Tailwind CSS",
+  },
+  {
+    label: "Tools & DevOps",
+    value: "Docker, Git",
+  },
+  {
+    label: "Core Competencies",
+    value: "Algorithm Design, Data Processing, Web Development, Problem Solving",
+  },
 ] as const;
 
 export default function AboutPage() {

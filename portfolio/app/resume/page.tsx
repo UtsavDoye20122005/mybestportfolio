@@ -58,14 +58,15 @@ const educationHighlights = [
 ];
 
 const skillGroups: SkillGroup[] = [
-  { label: "Programming Languages", value: "Python, HTML, CSS, JavaScript, ReactJS, Tailwind CSS" },
+  { label: "Programming Languages", value: "Python, HTML, CSS, JavaScript, TypeScript" },
+  { label: "Frontend", value: "Next.js, ReactJS, Tailwind CSS" },
+  {
+    label: "Tools and Technologies",
+    value: "Docker, Git, Responsive Design, Code Optimization",
+  },
   {
     label: "Core Competencies",
     value: "Algorithm Design, Data Processing, Web Development, Problem Solving",
-  },
-  {
-    label: "Tools and Technologies",
-    value: "Version Control (Git), Responsive Design, Code Optimization",
   },
 ];
 
