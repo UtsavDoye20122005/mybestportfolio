@@ -13,49 +13,100 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "signal-lab",
-    title: "Signal Lab",
+    slug: "nebula-gallery",
+    title: "Nebula Gallery",
     issueNumber: "#001",
-    oneLiner: "An alert system I built to cut through noisy sensor data — real-time dashboard with configurable thresholds and PostgreSQL-backed history.",
+    oneLiner:
+      "An infinite cosmic canvas built with vanilla HTML/CSS/JS — mood-filtered artwork, auto-tour mode, generative ambience, and visitor submissions.",
     problem:
-      "Teams needed signals fast, but alerts were noisy, delayed, and hard to trust. There was no single place to validate anomalies end-to-end.",
+      "Static grid galleries felt stale. The goal was a free-form spatial experience that feels like exploring a digital nebula instead of clicking through cards.",
     solution:
-      "Built an ingestion pipeline, rules engine, and a minimal dashboard to investigate events. Added typed contracts, retries, and a clean audit trail for every alert.",
+      "Built an explorable pan-and-zoom canvas, mood-based filtering, ambient generative soundscapes, and a submission flow so visitors can add their own artwork.",
     result:
-      "Cut time-to-detect from minutes to seconds, reduced false positives, and made incidents reproducible with an event log.",
-    stack: ["NEXT.JS", "TYPESCRIPT", "NODE", "POSTGRES"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/example",
+      "Delivered a unique art-gallery experience with minimal framework overhead and immersive discovery through motion, mood, and sound.",
+    stack: ["HTML5", "CSS3", "Vanilla JavaScript"],
+    liveUrl: "https://art-gallery-phi-beryl.vercel.app/",
+    githubUrl: "https://github.com/UtsavDoye20122005/Art-gallery",
   },
   {
-    slug: "ops-console",
-    title: "Ops Console",
+    slug: "prime-ledger",
+    title: "Prime Ledger",
     issueNumber: "#002",
-    oneLiner: "Internal dashboard for managing incidents and runbooks — reduced manual triage steps by wiring alerts directly into action flows.",
+    oneLiner:
+      "A React + Vite case-study platform that presents measurable business outcomes in a polished dark-mode interface.",
     problem:
-      "Manual ops workflows created bottlenecks: too many tabs, inconsistent runbooks, and slow handoffs during incidents.",
+      "Business success stories were hard to scan and lacked a structured format for decision-makers. The site needed clarity, speed, and a modern feel.",
     solution:
-      "Built a single console for triage with runbook shortcuts, safe automations, and permissioned actions. Optimized UX for speed and clarity under pressure.",
+      "Built a Tailwind-powered React/Vite app with a case-study driven layout, consistent dark-mode UI, and component-based pages for fast load times.",
     result:
-      "Shortened incident response loops and standardized workflows across the team.",
-    stack: ["REACT", "NODE", "EXPRESS", "DOCKER"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/example",
+      "Created a clean, easy-to-scan experience that highlights real results and keeps visitors focused on impact.",
+    stack: ["React", "Vite", "Tailwind CSS", "JavaScript", "ESLint"],
+    liveUrl: "https://prime-ledger-2-t2cb.vercel.app/",
+    githubUrl: "https://github.com/UtsavDoye20122005/Prime-ledger-2",
   },
   {
-    slug: "quant-notes",
-    title: "Quant Notes",
+    slug: "senparis",
+    title: "Senparis",
     issueNumber: "#003",
-    oneLiner: "A personal research tracker for logging trading strategies, backtest results, and market observations — built because spreadsheets weren't cutting it.",
+    oneLiner:
+      "A luxury fashion brand experience built from Figma to production with React, TypeScript, and Vite.",
     problem:
-      "Research artifacts were scattered across notebooks and docs, making it hard to compare experiments or reuse results.",
+      "High-end brand designs require pixel-perfect translation and scalable code. The challenge was preserving editorial elegance in a maintainable front-end build.",
     solution:
-      "Built a structured research log with tagging, versioned experiments, and exportable summaries. Designed for fast capture and later retrieval.",
+      "Translated a complex Figma system into a type-safe React codebase with clean layout, refined typography, and scalable visual components.",
     result:
-      "Improved reuse of past research and kept experiments consistent across iterations.",
-    stack: ["NEXT.JS", "TAILWIND", "PYTHON", "SQL"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/example",
+      "Delivered a luxe, production-ready fashion site with strong visual fidelity and modern tooling.",
+    stack: ["React", "TypeScript", "Vite", "CSS"],
+    liveUrl: "https://senparis-seven.vercel.app/",
+    githubUrl: "https://github.com/UtsavDoye20122005/senparis",
+  },
+  {
+    slug: "rural-telehealth-connect",
+    title: "Rural Telehealth Connect",
+    issueNumber: "WORKING",
+    oneLiner:
+      "AI-powered telemedicine for rural healthcare — symptom triage, offline prescriptions, and low-bandwidth consultations.",
+    problem:
+      "Rural communities lacked reliable digital healthcare access and needed a system that worked on low bandwidth with offline-ready workflows.",
+    solution:
+      "Built a hybrid telehealth ecosystem with a patient app, AI health assistant, and verified doctor network to bridge rural and urban care.",
+    result:
+      "Designed a platform that supports rural telemedicine with better accessibility, continuity, and trust.",
+    stack: ["Python", "AI/ML", "Telemedicine"],
+    liveUrl: "",
+    githubUrl: "https://github.com/UtsavDoye20122005",
+  },
+  {
+    slug: "adult-customer-filter-system",
+    title: "Adult Customer Filter System",
+    issueNumber: "WORKING",
+    oneLiner:
+      "A data filter system that identifies customer segments and target demographics with efficient, modular Python logic.",
+    problem:
+      "Customer data was scattered and slow to analyze, making it difficult to find high-value segments and insights.",
+    solution:
+      "Built a modular filtering app to process demographics, apply conditional rules, and surface target segments for rapid decision-making.",
+    result:
+      "Enabled smarter customer segmentation with a maintainable system for future enhancements.",
+    stack: ["Python"],
+    liveUrl: "",
+    githubUrl: "https://github.com/UtsavDoye20122005",
+  },
+  {
+    slug: "internship-agent",
+    title: "Internship Opportunity Agent",
+    issueNumber: "#006",
+    oneLiner:
+      "An AI agent that scans internship listings, matches them to your skills, and applies automatically to the best fits.",
+    problem:
+      "Finding internships is time-consuming and repetitive, with dozens of listings to filter by skills, interests, and eligibility.",
+    solution:
+      "Built an AI-powered screening workflow that evaluates listings against your profile, prioritizes the best opportunities, and automates applications.",
+    result:
+      "Saved hours of manual search and improved the quality of internship submissions with data-driven matching.",
+    stack: ["AI", "Automation", "JavaScript"],
+    liveUrl: "",
+    githubUrl: "https://github.com/UtsavDoye20122005",
   },
 ];
 

@@ -5,9 +5,9 @@ import { GITHUB_USERNAME } from "../../data/profile";
 import { useGithubContributions } from "./useGithubContributions";
 
 const stats = [
-  { value: "2", suffix: "", label: "years of building" },
-  { value: "8", suffix: "", label: "projects shipped" },
-  { value: "340", suffix: "", label: "bugs fixed" },
+  { value: "1", suffix: "", label: "years of building" },
+  { value: "5", suffix: "", label: "projects shipped" },
+  { value: "A lot", suffix: "", label: "bugs fixed, trust me" },
   { value: "420", suffix: "", label: "GitHub contributions" },
 ];
 
