@@ -121,6 +121,11 @@ const achievements: AchievementItem[] = [
     detail:
       "Selected for international educational trip to China to study innovation ecosystems and learn from leading global technology companies",
   },
+  {
+    title: "HPAIR Asia Conference (ACONF) 2026",
+    detail:
+      "Selected as a delegate to represent India at the HPAIR Asia Conference (ACONF) 2026 in Hanoi, Vietnam; participated in international research and policy discussions.",
+  },
 ];
 
 const interests: InterestItem[] = [
