@@ -44,9 +44,6 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
         <Link href={project.githubUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center border border-[var(--rule)] px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)] hover:text-[var(--accent)] transition-colors">
           GitHub
         </Link>
-        <Link href={`/projects/${project.slug}`} className="inline-flex items-center justify-center border border-[var(--rule)] px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)] hover:text-[var(--accent)] transition-colors">
-          Read more
-        </Link>
       </div>
     </article>
   );

@@ -101,16 +101,6 @@ function ProjectCard({ project, isTop, dragHandlers }: any) {
               Soon
             </span>
           )}
-          <Link
-            href={`/projects/${project.slug}`}
-            className="inline-flex items-center justify-between border-t border-[var(--rule)] pt-4 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)]"
-            draggable={false}
-          >
-            <span>Read more</span>
-            <span aria-hidden="true" className="text-[var(--accent)]">
-              →
-            </span>
-          </Link>
         </div>
       </footer>
     </div>
