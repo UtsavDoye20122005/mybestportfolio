@@ -16,7 +16,7 @@ export const projects: Project[] = [
     slug: "signal-lab",
     title: "Signal Lab",
     issueNumber: "#001",
-    oneLiner: "Low-latency alerts + analytics dashboard for noisy data.",
+    oneLiner: "An alert system I built to cut through noisy sensor data — real-time dashboard with configurable thresholds and PostgreSQL-backed history.",
     problem:
       "Teams needed signals fast, but alerts were noisy, delayed, and hard to trust. There was no single place to validate anomalies end-to-end.",
     solution:
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     slug: "ops-console",
     title: "Ops Console",
     issueNumber: "#002",
-    oneLiner: "Internal tooling for triage, automation, and runbooks.",
+    oneLiner: "Internal dashboard for managing incidents and runbooks — reduced manual triage steps by wiring alerts directly into action flows.",
     problem:
       "Manual ops workflows created bottlenecks: too many tabs, inconsistent runbooks, and slow handoffs during incidents.",
     solution:
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     slug: "quant-notes",
     title: "Quant Notes",
     issueNumber: "#003",
-    oneLiner: "Research tracker for strategies, experiments, and backtests.",
+    oneLiner: "A personal research tracker for logging trading strategies, backtest results, and market observations — built because spreadsheets weren't cutting it.",
     problem:
       "Research artifacts were scattered across notebooks and docs, making it hard to compare experiments or reuse results.",
     solution:

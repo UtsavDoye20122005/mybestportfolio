@@ -76,16 +76,42 @@ function ProjectCard({ project, isTop, dragHandlers }: any) {
           ))}
         </div>
 
-        <Link
-          href={`/projects/${project.slug}`}
-          className="inline-flex items-center justify-between border-t border-[var(--rule)] pt-4 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)]"
-          draggable={false}
-        >
-          <span>Read more</span>
-          <span aria-hidden="true" className="text-[var(--accent)]">
-            →
-          </span>
-        </Link>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href={project.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-between border border-[var(--rule)] px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)] hover:text-[var(--accent)] transition-colors"
+            draggable={false}
+          >
+            GitHub
+          </Link>
+          {project.liveUrl ? (
+            <Link
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-between border border-[var(--rule)] px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)] hover:text-[var(--accent)] transition-colors"
+              draggable={false}
+            >
+              Live
+            </Link>
+          ) : (
+            <span className="inline-flex items-center justify-between border border-[var(--rule)] px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)] opacity-40 cursor-default">
+              Soon
+            </span>
+          )}
+          <Link
+            href={`/projects/${project.slug}`}
+            className="inline-flex items-center justify-between border-t border-[var(--rule)] pt-4 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)]"
+            draggable={false}
+          >
+            <span>Read more</span>
+            <span aria-hidden="true" className="text-[var(--accent)]">
+              →
+            </span>
+          </Link>
+        </div>
       </footer>
     </div>
   );

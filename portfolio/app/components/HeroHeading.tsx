@@ -1,79 +1,66 @@
 "use client";
 
-import { useEffect, useRef, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+
+const TARGET_TEXT = "I BUILD SYSTEMS THAT JUST WORK";
 
 export function HeroHeading() {
-  const targetName = "UTSAV DOYE";
-  const [scrambledName, setScrambledName] = useState<string>(() => {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    return targetName
-      .split("")
-      .map((ch) => (ch === " " ? " " : letters[Math.floor(Math.random() * letters.length)]))
-      .join("");
-  });
-  const [nameResolved, setNameResolved] = useState(false);
-  const perCharCycles = useMemo(() => {
-    return targetName.split("").map((ch) => (ch === " " ? 0 : 3 + Math.floor(Math.random() * 2)));
-  }, [targetName]);
-
-  const h1Ref = useRef<HTMLHeadingElement>(null);
+  const [displayText, setDisplayText] = useState<string>(TARGET_TEXT);
+  const [resolved, setResolved] = useState(true);
 
   useEffect(() => {
-    const durationMs = 1000;
+    let animationFrame = 0;
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const start = performance.now();
+    const durationMs = 1500;
+    const chars = TARGET_TEXT.split("");
+    const perCharCycles = chars.map((ch) => (ch === " " ? 0 : 2 + Math.floor(Math.random() * 2)));
 
-    const pickLetter = (i: number, cycle: number) => {
-      const x = Math.sin((i + 1) * 999 + (cycle + 1) * 97) * 10000;
+    const pickLetter = (index: number, cycle: number) => {
+      const x = Math.sin((index + 1) * 999 + (cycle + 1) * 97) * 10000;
       const idx = Math.floor((x - Math.floor(x)) * letters.length);
       return letters[Math.max(0, Math.min(letters.length - 1, idx))];
     };
 
-    let raf = 0;
     const tick = (now: number) => {
-      const t = Math.min(durationMs, now - start);
-      const next = targetName
-        .split("")
+      const elapsed = Math.min(durationMs, now - start);
+      const nextText = chars
         .map((targetCh, i, arr) => {
           if (targetCh === " ") return " ";
-          const cycles = perCharCycles[i] ?? 3;
-          const denom = Math.max(1, arr.length - 1);
-          const settleAt = durationMs * (0.35 + 0.65 * (i / denom));
-
-          if (t >= settleAt) return targetCh;
-
-          const cyclePeriod = settleAt / (cycles + 1);
-          const cycle = Math.min(cycles - 1, Math.floor(t / Math.max(1, cyclePeriod)));
+          const settleAt = durationMs * (0.25 + 0.65 * (i / Math.max(1, arr.length - 1)));
+          if (elapsed >= settleAt) return targetCh;
+          const cyclePeriod = Math.max(1, settleAt / (perCharCycles[i] + 1));
+          const cycle = Math.min(perCharCycles[i] - 1, Math.floor(elapsed / cyclePeriod));
           return pickLetter(i, cycle);
         })
         .join("");
 
-      setScrambledName(next);
+      setDisplayText(nextText);
 
-      if (t >= durationMs) {
-        setScrambledName(targetName);
-        setNameResolved(true);
-        return;
+      if (elapsed < durationMs) {
+        animationFrame = requestAnimationFrame(tick);
+      } else {
+        setDisplayText(TARGET_TEXT);
+        setResolved(true);
       }
-
-      raf = requestAnimationFrame(tick);
     };
 
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [perCharCycles, targetName]);
+    setResolved(false);
+    animationFrame = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
 
   return (
     <h1
       data-reveal
-      className="mt-5 font-sans text-4xl leading-[0.94] tracking-[-0.025em] text-[var(--fg)] sm:text-5xl md:text-6xl lg:text-[6.5rem] xl:text-[7.5rem] sm:origin-left"
+      className="mt-5 font-sans text-4xl leading-[0.95] tracking-[-0.025em] text-[var(--fg)] sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-[6.5rem] 2xl:text-[7rem] sm:origin-left"
+      style={{ maxWidth: "100%" }}
     >
-      <span className="whitespace-nowrap">{scrambledName}</span>
-      {nameResolved ? (
-        <span className="cursor-blink" aria-hidden="true">
-          |
-        </span>
-      ) : null}
+      <span className="block max-w-full break-words" aria-label={TARGET_TEXT}>
+        {displayText}
+      </span>
+      <span className="text-[var(--accent)]">{resolved ? "" : "|"}</span>
     </h1>
   );
 }

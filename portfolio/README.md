@@ -55,6 +55,23 @@ Optional enrichment:
 
 For public deployment, use `DATABASE_URL`. The file-based store is only a local fallback and should not be relied on in serverless production.
 
+## Visitor Counter
+
+This portfolio includes a visitor counter at `/api/visitor`.
+
+- `POST /api/visitor` increments the visitor count and returns the new value.
+- `GET /api/visitor` reads the current count.
+- The frontend component at `app/components/VisitorCounter.tsx` uses the API to show the visitor number.
+
+### Production behavior
+
+- With `DATABASE_URL` configured, visitor counts are stored in Postgres in the `visitor_counter` table.
+- Without `DATABASE_URL`, the app falls back to `.data/visitor-count.json` for local development.
+
+### Recommended deployment
+
+Use a hosted Postgres database and set `DATABASE_URL` in your production environment.
+
 ## Commands
 
 ```bash

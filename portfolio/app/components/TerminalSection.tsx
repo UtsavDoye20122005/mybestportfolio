@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
-type Line = { kind: "prompt" | "output"; text: string };
+type Line = { id: number; kind: "prompt" | "output"; text: string };
 
 const EMAIL = "utsavdoye07@gmail.com";
 
@@ -75,16 +75,24 @@ export function TerminalSection() {
     // Auto-type welcome message on load.
     const msg = "Welcome to utsav.dev — type 'help' to see available commands.";
     let i = 0;
-    setLines([{ kind: "output", text: "" }]);
-    const id = window.setInterval(() => {
+    let timer: number | null = null;
+    const nextId = { v: 1 };
+    const tick = () => {
       i++;
-      setLines([{ kind: "output", text: msg.slice(0, i) }]);
+      setLines([{ id: nextId.v++, kind: "output", text: msg.slice(0, i) }]);
       if (i >= msg.length) {
-        window.clearInterval(id);
         setWelcomeDone(true);
+        return;
       }
-    }, 18);
-    return () => window.clearInterval(id);
+      timer = window.setTimeout(tick, 18);
+    };
+
+    // start
+    setLines([{ id: nextId.v++, kind: "output", text: "" }]);
+    timer = window.setTimeout(tick, 18);
+    return () => {
+      if (timer) window.clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -99,7 +107,12 @@ export function TerminalSection() {
     const lower = input.toLowerCase();
     const [cmd] = lower.split(/\s+/);
 
-    const push = (next: Line[]) => setLines((prev) => [...prev, ...next]);
+    const nextId = useRef(1000);
+    const push = (next: Omit<Line, "id">[]) =>
+      setLines((prev) => [
+        ...prev,
+        ...next.map((n) => ({ id: ++nextId.current, ...n })),
+      ]);
 
     if (!input) return;
 
@@ -234,9 +247,9 @@ export function TerminalSection() {
           </div>
 
           <div ref={outputRef} className="terminal__output" aria-live="polite">
-            {lines.map((l, idx) => (
+            {lines.map((l) => (
               <div
-                key={idx}
+                key={l.id}
                 className={l.kind === "prompt" ? "terminal__line terminal__line--prompt" : "terminal__line"}
               >
                 {l.kind === "prompt" ? <span className="terminal__prompt">→ </span> : null}

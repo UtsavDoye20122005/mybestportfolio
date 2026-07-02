@@ -19,8 +19,7 @@ export default function ProjectsPage() {
               Projects
             </h1>
             <p className="mt-4 max-w-2xl font-mono text-sm leading-7 text-[var(--muted)]">
-              [SHORT_PROJECTS_INTRO] — a small archive of builds, experiments, and
-              shipped systems.
+              A small archive of builds, experiments, and shipped systems.
             </p>
           </div>
 

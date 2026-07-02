@@ -12,17 +12,9 @@ export function VisitorCounter() {
 
   useEffect(() => {
     if (didFetch.current) return;
-    didFetch.current = true;
-
-    fetch("https://api.counterapi.dev/v1/utsavdoye.dev/visits/up")
-      .then(r => {
-        if (!r.ok) throw new Error("Failed");
-        return r.json();
-      })
-      .then(d => {
-        setCount(d.count);
-      })
-      .catch(() => setError(true));
+    // fetch will be triggered once the component becomes visible to the user
+    // (see IntersectionObserver effect below). This avoids doing network
+    // requests during initial client render when not visible.
   }, []);
 
   useEffect(() => {
@@ -31,6 +23,19 @@ export function VisitorCounter() {
         if (entries[0].isIntersecting) {
           setIsVisible(true);
           observer.disconnect();
+
+          if (didFetch.current) return;
+          didFetch.current = true;
+
+          fetch("/api/visitor", { method: "POST" })
+            .then((r) => {
+              if (!r.ok) throw new Error("Failed");
+              return r.json();
+            })
+            .then((d) => {
+              setCount(typeof d.value === "number" ? d.value : null);
+            })
+            .catch(() => setError(true));
         }
       },
       { threshold: 0.1 }

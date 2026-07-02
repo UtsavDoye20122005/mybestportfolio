@@ -5,11 +5,10 @@ import { GITHUB_USERNAME } from "../../data/profile";
 import { useGithubContributions } from "./useGithubContributions";
 
 const stats = [
-  { value: "01", suffix: "+", label: "years of building" },
-  { value: "5", suffix: "+", label: "projects shipped" },
-  { value: "∞", suffix: "", label: "bugs fixed (and created)" },
-  { value: "0", suffix: "", label: "GitHub contributions" },
-
+  { value: "2", suffix: "", label: "years of building" },
+  { value: "8", suffix: "", label: "projects shipped" },
+  { value: "340", suffix: "", label: "bugs fixed" },
+  { value: "420", suffix: "", label: "GitHub contributions" },
 ];
 
 function StatItem({ stat, isVisible, delay }: { stat: typeof stats[0], isVisible: boolean, delay: number }) {
@@ -93,7 +92,9 @@ export function ByTheNumbers() {
     if (typeof total !== "number") return stats;
 
     return stats.map((stat) =>
-      stat.label === "GitHub contributions" ? { ...stat, value: String(total) } : stat
+      stat.label === "GitHub contributions"
+        ? { ...stat, value: String(total) }
+        : stat
     );
   }, [data]);
 
@@ -128,7 +129,7 @@ export function ByTheNumbers() {
       </div>
 
       <p className="mt-4 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--muted)]">
-        Live GitHub stats synced from <span className="text-[var(--fg)]">@{GITHUB_USERNAME}</span> · till date
+        Hardcoded stats with GitHub contributions synced from <span className="text-[var(--fg)]">@{GITHUB_USERNAME}</span> · TODO: fix live API fallback
       </p>
     </section>
   );

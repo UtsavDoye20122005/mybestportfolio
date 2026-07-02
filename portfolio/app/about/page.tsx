@@ -74,17 +74,11 @@ export default function AboutPage() {
         <article className="pt-8 md:pt-10" data-reveal-stagger>
           <div className="space-y-4">
             <p data-reveal className="font-mono text-sm leading-7 text-[var(--muted)]">
-              Hi, I’m <span className="text-[var(--fg)]">UTSAV DOYE. A full-stack developer balancing studies and professional work — building real things while still learning what's possible.
-              </span>
-              {" "}
-              <span className="text-[var(--fg)]">
-                I'm drawn to the intersection of clean systems and sharp interfaces. Whether it's a backend that doesn't break or a UI that doesn't make you think — I care about software that just works.
-              </span>{" "}
-
+              Hi, I'm <span className="text-[var(--fg)]">Utsav.</span> I'm a full-stack developer based in [your city], currently studying [your degree/field] while building real systems on the side. I care about software that reads clearly — backends that don't break, interfaces that don't make you think.
             </p>
 
             <p data-reveal className="font-mono text-sm leading-7 text-[var(--muted)]">
-              Outside code: music, markets, and automation. I trade, build AI workflows, and occasionally get lost in a good track.
+              Outside code I'm usually in the markets, building automation workflows, or deep in a playlist I refuse to skip. I started this portfolio in March 2025 to have somewhere to put everything I'm learning.
             </p>
           </div>
 
@@ -120,13 +114,13 @@ export default function AboutPage() {
             </h2>
             <ul className="mt-4 space-y-3 border border-[var(--rule)] p-4">
               <li className="font-mono text-sm leading-7 text-[var(--muted)]">
-                → Learning: <span className="text-[var(--fg)]">Advanced System Design, Web3</span>
+                → Learning: <span className="text-[var(--fg)]">Advanced System Design, Web3 basics</span>
               </li>
               <li className="font-mono text-sm leading-7 text-[var(--muted)]">
-                → Building: <span className="text-[var(--fg)]">More robust, typed backends</span>
+                → Building: <span className="text-[var(--fg)]">[name your actual current project here]</span>
               </li>
               <li className="font-mono text-sm leading-7 text-[var(--muted)]">
-                → Reading: <span className="text-[var(--fg)]">Financial literature & Tech docs</span>
+                → Reading: <span className="text-[var(--fg)]">[actual book or doc you're reading right now]</span>
               </li>
             </ul>
           </section>
