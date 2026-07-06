@@ -5,7 +5,7 @@ import { projects } from "../../data/projects";
 
 function ProjectCard({ project }: { project: (typeof projects)[number] }) {
   return (
-    <article className="border border-[var(--rule)] bg-[#080808] p-6 transition hover:border-[var(--accent)]">
+    <article className="border border-[var(--rule)] bg-[var(--card-bg)] p-6 transition hover:border-[var(--accent)]">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">

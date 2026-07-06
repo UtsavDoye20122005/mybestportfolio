@@ -156,7 +156,7 @@ function ResumeSection({
 }) {
   return (
     <section
-      className="border border-[var(--rule)] bg-white/[0.02] p-5 sm:p-6"
+      className="border border-[var(--rule)] bg-[var(--subtle-bg)] p-5 sm:p-6"
       data-reveal
     >
       <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-[var(--accent)]">
@@ -256,7 +256,7 @@ export default function ResumePage() {
             {contactItems.map((item) => (
               <div
                 key={item.label}
-                className="border border-[var(--rule)] bg-white/[0.02] px-4 py-4"
+                className="border border-[var(--rule)] bg-[var(--subtle-bg)] px-4 py-4"
               >
                 <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
                   {item.label}

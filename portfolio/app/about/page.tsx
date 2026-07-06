@@ -102,12 +102,12 @@ export default function AboutPage() {
                 {stackRows.map((r) => (
                   <StaggerItem
                     key={r.label}
-                    className="grid grid-cols-1 gap-2 px-4 py-4 sm:grid-cols-[160px_1fr] hover:bg-white/[0.02] transition-colors"
+                    className="grid grid-cols-1 gap-2 px-4 py-4 sm:grid-cols-[160px_1fr] hover:bg-[var(--subtle-bg)] transition-colors"
                   >
                     <div className="font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">
                       {r.label}
                     </div>
-                    <div className="font-mono text-sm leading-6 text-[var(--fg)]/90">
+                    <div className="font-mono text-sm leading-6 text-[var(--fg)]">
                       {r.value}
                     </div>
                   </StaggerItem>
@@ -128,10 +128,10 @@ export default function AboutPage() {
                 → Learning: <span className="text-[var(--fg)]">Advanced System Design, Web3 basics</span>
               </li>
               <li className="font-mono text-sm leading-7 text-[var(--muted)]">
-                → Building: <span className="text-[var(--fg)]">[name your actual current project here]</span>
+                → Building: <span className="text-[var(--fg)]">Internship Opportunity Agent & Adult Customer Filter System</span>
               </li>
               <li className="font-mono text-sm leading-7 text-[var(--muted)]">
-                → Reading: <span className="text-[var(--fg)]">[actual book or doc you're reading right now]</span>
+                → Reading: <span className="text-[var(--fg)]">Reading about AI&ML</span>
               </li>
             </ul>
           </section>

@@ -45,7 +45,7 @@ export default function ContactPage() {
                   <li key={s.label}>
                     <a
                       href={s.href}
-                      className="flex items-center justify-between gap-6 px-4 py-4 font-mono text-sm uppercase tracking-[0.22em] text-[var(--fg)]/90 hover:text-[var(--accent)]"
+                      className="flex items-center justify-between gap-6 px-4 py-4 font-mono text-sm uppercase tracking-[0.22em] text-[var(--fg)] hover:text-[var(--accent)]"
                     >
                       <span>{s.label}</span>
                       <span aria-hidden="true">→</span>

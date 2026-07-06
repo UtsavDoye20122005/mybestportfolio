@@ -50,7 +50,7 @@ const languageNameByCode: Record<string, string> = {
 };
 
 const inputClass =
-  "mt-2 w-full border-0 border-b border-[#2a2a1a] bg-[#0d0d0a] px-0 py-2 font-mono text-[13px] text-[#f0ede6] outline-none transition-colors duration-200 focus:border-[#e8ff00]";
+  "mt-2 w-full border-0 border-b border-[var(--form-border)] bg-[var(--form-bg)] px-0 py-2 font-mono text-[13px] text-[var(--fg)] outline-none transition-colors duration-200 focus:border-[var(--accent)]";
 
 export default function ContactNotePanel() {
   const [name, setName] = useState("");
@@ -223,14 +223,14 @@ export default function ContactNotePanel() {
 
   if (sent) {
     return (
-      <div className="mx-auto flex w-full max-w-[480px] flex-col items-center justify-center gap-4 rounded-md border border-[#2a2a1a] bg-[#0d0d0a] px-6 py-10 text-center">
-        <pre className="whitespace-pre-line text-[12px] font-mono uppercase tracking-[0.2em] text-[#e8ff00]">
+      <div className="mx-auto flex w-full max-w-[480px] flex-col items-center justify-center gap-4 rounded-md border border-[var(--form-border)] bg-[var(--form-card-bg)] px-6 py-10 text-center">
+        <pre className="whitespace-pre-line text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--accent)]">
           {typewriter}
         </pre>
         <button
           type="button"
           onClick={resetForm}
-          className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#f0ede6]/80 hover:text-[#e8ff00]"
+          className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--fg)] opacity-80 hover:text-[var(--accent)]"
         >
           send another →
         </button>
@@ -240,16 +240,16 @@ export default function ContactNotePanel() {
 
   return (
     <div className="mx-auto w-full max-w-[480px]">
-      <div className="rounded-md border border-[#2a2a1a] bg-[#11110d] px-5 py-6">
+      <div className="rounded-md border border-[var(--form-border)] bg-[var(--form-card-bg)] px-5 py-6">
         <div className="flex items-center justify-between">
-          <span className="border-b border-[#e8ff00] pb-1 font-mono text-[10px] uppercase tracking-[0.32em] text-[#f0ede6]">
+          <span className="border-b border-[var(--accent)] pb-1 font-mono text-[10px] uppercase tracking-[0.32em] text-[var(--fg)]">
             WHO ARE YOU
           </span>
         </div>
 
         <div className="mt-5">
-          <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[#666]">
-            Name <span className="text-[#e8ff00]">*</span>
+          <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[var(--muted-secondary)]">
+            Name <span className="text-[var(--accent)]">*</span>
           </label>
           <input
             className={`${inputClass} ${shake.name ? "input-shake" : ""}`}
@@ -258,15 +258,15 @@ export default function ContactNotePanel() {
             placeholder="your name"
           />
           {errors.name && (
-            <p className="mt-1 text-[10px] font-mono uppercase tracking-[0.2em] text-[#ff6b6b]">
+            <p className="mt-1 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--error)]">
               {errors.name}
             </p>
           )}
         </div>
 
         <div className="mt-4">
-          <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[#666]">
-            Email <span className="text-[#e8ff00]">*</span>
+          <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[var(--muted-secondary)]">
+            Email <span className="text-[var(--accent)]">*</span>
           </label>
           <input
             className={`${inputClass} ${shake.email ? "input-shake" : ""}`}
@@ -276,19 +276,19 @@ export default function ContactNotePanel() {
             type="email"
           />
           {errors.email && (
-            <p className="mt-1 text-[10px] font-mono uppercase tracking-[0.2em] text-[#ff6b6b]">
+            <p className="mt-1 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--error)]">
               {errors.email}
             </p>
           )}
         </div>
 
         <div className="mt-5">
-          <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[#666]">
-            What&apos;s this about? <span className="text-[#e8ff00]">*</span>
+          <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[var(--muted-secondary)]">
+            What&apos;s this about? <span className="text-[var(--accent)]">*</span>
           </label>
           <div
             className={`mt-3 flex flex-wrap gap-2 rounded-md border border-transparent p-2 transition-colors ${
-              errors.type ? "border-[#ff6b6b]" : "border-[#1a1a14]"
+              errors.type ? "border-[var(--error)]" : "border-[var(--form-border)]"
             }`}
           >
             {contactTypes.map((type) => {
@@ -300,8 +300,8 @@ export default function ContactNotePanel() {
                   onClick={() => setContactType(type)}
                   className={`rounded-full border px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] transition-colors ${
                     active
-                      ? "border-[#e8ff00] bg-[#e8ff00] text-[#1a1a14]"
-                      : "border-[#e8ff00] bg-[#11110d] text-[#e8ff00]"
+                      ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--form-button-text)]"
+                      : "border-[var(--accent)] bg-[var(--form-card-bg)] text-[var(--accent)]"
                   }`}
                 >
                   {type}
@@ -314,7 +314,7 @@ export default function ContactNotePanel() {
         <button
           type="button"
           onClick={() => setShowOptional((prev) => !prev)}
-          className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#6a6a6a] hover:text-[#e8ff00]"
+          className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--muted-tertiary)] hover:text-[var(--accent)]"
         >
           + add more details (optional)
         </button>
@@ -326,7 +326,7 @@ export default function ContactNotePanel() {
         >
           <div className="mt-5 grid gap-4">
             <div>
-              <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[#666]">Phone</label>
+              <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[var(--muted-secondary)]">Phone</label>
               <input
                 className={inputClass}
                 value={phone}
@@ -335,7 +335,7 @@ export default function ContactNotePanel() {
               />
             </div>
             <div>
-              <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[#666]">
+              <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[var(--muted-secondary)]">
                 Company / College
               </label>
               <input
@@ -346,7 +346,7 @@ export default function ContactNotePanel() {
               />
             </div>
             <div>
-              <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[#666]">GitHub</label>
+              <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[var(--muted-secondary)]">GitHub</label>
               <input
                 className={inputClass}
                 value={github}
@@ -355,7 +355,7 @@ export default function ContactNotePanel() {
               />
             </div>
             <div>
-              <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[#666]">LinkedIn</label>
+              <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[var(--muted-secondary)]">LinkedIn</label>
               <input
                 className={inputClass}
                 value={linkedin}
@@ -364,7 +364,7 @@ export default function ContactNotePanel() {
               />
             </div>
             <div>
-              <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[#666]">Website</label>
+              <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[var(--muted-secondary)]">Website</label>
               <input
                 className={inputClass}
                 value={website}
@@ -375,7 +375,7 @@ export default function ContactNotePanel() {
 
             {needsBudget && (
               <div>
-                <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[#666]">Budget</label>
+                <label className="text-[10px] font-mono uppercase tracking-[0.28em] text-[var(--muted-secondary)]">Budget</label>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {budgetOptions.map((option) => {
                     const active = budget === option;
@@ -386,8 +386,8 @@ export default function ContactNotePanel() {
                         onClick={() => setBudget(option)}
                         className={`rounded-full border px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] transition-colors ${
                           active
-                            ? "border-[#e8ff00] bg-[#e8ff00] text-[#1a1a14]"
-                            : "border-[#e8ff00] bg-[#11110d] text-[#e8ff00]"
+                            ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--form-button-text)]"
+                            : "border-[var(--accent)] bg-[var(--form-card-bg)] text-[var(--accent)]"
                         }`}
                       >
                         {option}
@@ -400,10 +400,10 @@ export default function ContactNotePanel() {
           </div>
         </div>
 
-        <div className="my-6 flex items-center gap-3 text-[9px] font-mono uppercase tracking-[0.28em] text-[#666]">
-          <span className="h-px flex-1 bg-[#2a2a1a]" />
+        <div className="my-6 flex items-center gap-3 text-[9px] font-mono uppercase tracking-[0.28em] text-[var(--muted-tertiary)]">
+          <span className="h-px flex-1 bg-[var(--form-border)]" />
           <span>AND YOUR NOTE</span>
-          <span className="h-px flex-1 bg-[#2a2a1a]" />
+          <span className="h-px flex-1 bg-[var(--form-border)]" />
         </div>
 
         <div>
@@ -412,20 +412,20 @@ export default function ContactNotePanel() {
             onClick={() => setShowNoteComposer((prev) => !prev)}
             aria-expanded={showNoteComposer}
             aria-controls="contact-note-composer"
-            className="group flex w-full items-center justify-between gap-4 border-b border-[#2a2a1a] pb-3 text-left transition-colors hover:border-[#3a3a2a]"
+            className="group flex w-full items-center justify-between gap-4 border-b border-[var(--form-border)] pb-3 text-left transition-colors hover:border-[var(--form-border)]"
           >
-            <span className="border-b border-[#e8ff00] pb-1 font-mono text-[10px] uppercase tracking-[0.32em] text-[#f0ede6]">
+            <span className="border-b border-[var(--accent)] pb-1 font-mono text-[10px] uppercase tracking-[0.32em] text-[var(--fg)]">
               ADD A NOTE (OPTIONAL)
             </span>
             <span
               className={`font-mono text-[10px] uppercase tracking-[0.24em] transition-all duration-300 ${
-                showNoteComposer ? "text-[#e8ff00]" : "text-[#6a6a6a] group-hover:text-[#f0ede6]"
+                showNoteComposer ? "text-[var(--accent)]" : "text-[var(--muted-tertiary)] group-hover:text-[var(--fg)]"
               }`}
             >
               {showNoteComposer ? "close −" : "open +"}
             </span>
           </button>
-          <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.22em] text-[#6a6a6a]">
+          <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.22em] text-[var(--muted-tertiary)]">
             {showNoteComposer
               ? "record your voice or just type below"
               : "click to open a smooth note drawer with voice and typing options"}
@@ -443,10 +443,10 @@ export default function ContactNotePanel() {
                 className="overflow-hidden"
               >
                 <div className="pt-4">
-                  <div className="relative inline-grid grid-cols-2 rounded-full border border-[#2a2a1a] bg-[#0d0d0a] p-1">
+                  <div className="relative inline-grid grid-cols-2 rounded-full border border-[var(--form-border)] bg-[var(--form-bg)] p-1">
                     <motion.span
                       layoutId="contact-note-tab"
-                      className="absolute bottom-1 left-1 top-1 rounded-full border border-[#3a3a2a] bg-[#17170f]"
+                      className="absolute bottom-1 left-1 top-1 rounded-full border border-[var(--form-border)] bg-[var(--form-card-bg)]"
                       style={{ width: "calc(50% - 4px)" }}
                       animate={{ x: activeTab === "voice" ? 0 : "100%" }}
                       transition={{ type: "spring", stiffness: 320, damping: 28 }}
@@ -455,7 +455,7 @@ export default function ContactNotePanel() {
                       type="button"
                       onClick={() => setActiveTab("voice")}
                       className={`relative z-10 rounded-full px-4 py-2 font-mono text-[10px] uppercase tracking-[0.24em] transition-colors ${
-                        activeTab === "voice" ? "text-[#f0ede6]" : "text-[#6a6a6a]"
+                        activeTab === "voice" ? "text-[var(--fg)]" : "text-[var(--muted-tertiary)]"
                       }`}
                     >
                       Voice Note
@@ -464,7 +464,7 @@ export default function ContactNotePanel() {
                       type="button"
                       onClick={() => setActiveTab("text")}
                       className={`relative z-10 rounded-full px-4 py-2 font-mono text-[10px] uppercase tracking-[0.24em] transition-colors ${
-                        activeTab === "text" ? "text-[#f0ede6]" : "text-[#6a6a6a]"
+                        activeTab === "text" ? "text-[var(--fg)]" : "text-[var(--muted-tertiary)]"
                       }`}
                     >
                       Type Instead
@@ -491,8 +491,8 @@ export default function ContactNotePanel() {
                               }}
                             />
                           ) : (
-                            <div className="rounded-md border border-[#2a2a1a] bg-[#0d0d0a] px-4 py-6 text-center">
-                              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6a6a6a]">
+                            <div className="rounded-md border border-[var(--form-border)] bg-[var(--form-bg)] px-4 py-6 text-center">
+                              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--muted-tertiary)]">
                                 voice notes work best in Chrome or Edge. use the TYPE INSTEAD tab to
                                 leave a message, or open this page in Chrome.
                               </p>
@@ -507,16 +507,16 @@ export default function ContactNotePanel() {
                           exit={{ opacity: 0, x: -18 }}
                           transition={{ duration: 0.28, ease: "easeOut" }}
                         >
-                          <div className="rounded-md border border-[#2a2a1a] bg-[#0d0d0a] p-4">
+                          <div className="rounded-md border border-[var(--form-border)] bg-[var(--form-bg)] p-4">
                             <textarea
-                              className="min-h-[140px] w-full resize-none bg-transparent font-mono text-[13px] text-[#f0ede6] outline-none"
+                              className="min-h-[140px] w-full resize-none bg-transparent font-mono text-[13px] text-[var(--fg)] outline-none"
                               placeholder="type your message here... no judgment, no word limit."
                               maxLength={500}
                               value={typedMessage}
                               onChange={(event) => setTypedMessage(event.target.value)}
                             />
-                            <div className="mt-2 text-right font-mono text-[9px] uppercase tracking-[0.22em] text-[#6a6a6a]">
-                              <span className={typedMessage.length >= 450 ? "text-[#e8ff00]" : ""}>
+                            <div className="mt-2 text-right font-mono text-[9px] uppercase tracking-[0.22em] text-[var(--muted-tertiary)]">
+                              <span className={typedMessage.length >= 450 ? "text-[var(--accent)]" : ""}>
                                 {typedMessage.length} / 500
                               </span>
                             </div>
@@ -532,7 +532,7 @@ export default function ContactNotePanel() {
         </div>
 
         {submitError && (
-          <p className="mt-4 text-[10px] font-mono uppercase tracking-[0.2em] text-[#ff6b6b]">
+          <p className="mt-4 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--error)]">
             {submitError}
           </p>
         )}
@@ -541,7 +541,7 @@ export default function ContactNotePanel() {
           type="button"
           onClick={handleSubmit}
           disabled={submitting}
-          className="mt-6 w-full rounded-md bg-[#e8ff00] px-4 py-3 font-mono text-[12px] uppercase tracking-[0.32em] text-[#1a1a14] transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-6 w-full rounded-md bg-[var(--accent)] px-4 py-3 font-mono text-[12px] uppercase tracking-[0.32em] text-[var(--form-button-text)] transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {submitting
             ? "SENDING..."

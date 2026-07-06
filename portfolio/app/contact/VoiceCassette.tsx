@@ -183,8 +183,15 @@ function buildReelSvg() {
       className="h-[72px] w-[72px]"
       aria-hidden="true"
     >
-      <circle cx="50" cy="50" r="40" fill="#2a2a1a" stroke="#3a3a2a" strokeWidth="4" />
-      <circle cx="50" cy="50" r="12" fill="#3a3a2a" />
+      <circle
+        cx="50"
+        cy="50"
+        r="40"
+        fill="var(--cassette-reel)"
+        stroke="var(--cassette-reel-line)"
+        strokeWidth="4"
+      />
+      <circle cx="50" cy="50" r="12" fill="var(--cassette-reel-line)" />
       {spokes.map((deg) => (
         <line
           key={deg}
@@ -192,7 +199,7 @@ function buildReelSvg() {
           y1="18"
           x2="50"
           y2="38"
-          stroke="#3a3a2a"
+          stroke="var(--cassette-reel-line)"
           strokeWidth="4"
           strokeLinecap="round"
           transform={`rotate(${deg} 50 50)`}
@@ -646,12 +653,12 @@ export default function VoiceCassette({
 
   const indicator = (() => {
     if (mode === "recording") {
-      return { text: "● REC", className: "text-[#ff4444] cassette__indicator-pulse" };
+      return { text: "● REC", className: "text-[var(--record)] cassette__indicator-pulse" };
     }
     if (mode === "playing") {
-      return { text: "● PLAY", className: "text-[#44ff44]" };
+      return { text: "● PLAY", className: "text-[var(--success)]" };
     }
-    return { text: "○ READY", className: "text-[#6a6a4a]" };
+    return { text: "○ READY", className: "text-[var(--muted-tertiary)]" };
   })();
 
   const tapeLangLabel = detectingLang
@@ -665,26 +672,26 @@ export default function VoiceCassette({
 
   return (
     <div className="w-full max-w-[420px]">
-      <div className="relative rounded-[16px] border-2 border-[#3a3a2a] bg-[#1a1a14] px-6 py-7 shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
+      <div className="relative rounded-[16px] border-2 border-[var(--form-border)] bg-[var(--form-card-bg)] px-6 py-7 shadow-[var(--elevated-shadow)]">
         <div className="absolute right-5 top-5 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em]">
           <span className={indicator.className}>{indicator.text}</span>
         </div>
 
-        <div className="flex items-center justify-between rounded-md bg-[#111108] px-3 py-2">
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#e8ff00]">UTSAV.DEV</span>
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#f0ede6]">◈ VOICE MESSAGE ◈</span>
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#7a7a5a]">C-60</span>
+        <div className="flex items-center justify-between rounded-md bg-[var(--form-bg)] px-3 py-2">
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--accent)]">UTSAV.DEV</span>
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--fg)]">◈ VOICE MESSAGE ◈</span>
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--muted-tertiary)]">C-60</span>
         </div>
 
-        <div className="relative mx-2 mt-4 rounded-[8px] border border-[#2a2a1a] bg-[#0d0d0a] px-4 py-4">
-          <div className="absolute right-3 top-3 font-mono text-[9px] uppercase tracking-[0.22em] text-[#e8ff00]">
+        <div className="relative mx-2 mt-4 rounded-[8px] border border-[var(--form-border)] bg-[var(--form-bg)] px-4 py-4">
+          <div className="absolute right-3 top-3 font-mono text-[9px] uppercase tracking-[0.22em] text-[var(--accent)]">
             {tapeLangLabel}
           </div>
           <div className="absolute left-1/2 top-3 flex -translate-x-1/2 items-end gap-[4px]">
             {waveBars.map((height, index) => (
               <div
                 key={index}
-                className="w-[4px] rounded-sm bg-[#2a2a1a] transition-[height] duration-150"
+                className="w-[4px] rounded-sm bg-[var(--form-border)] transition-[height] duration-150"
                 style={{ height }}
               />
             ))}
@@ -714,7 +721,12 @@ export default function VoiceCassette({
             className="absolute bottom-3 left-1/2 w-[70%] -translate-x-1/2"
             aria-hidden="true"
           >
-            <path d="M 0 10 C 50 18, 150 18, 200 10" stroke="#2a2a1a" strokeWidth="2" fill="none" />
+            <path
+              d="M 0 10 C 50 18, 150 18, 200 10"
+              stroke="var(--cassette-reel)"
+              strokeWidth="2"
+              fill="none"
+            />
           </svg>
         </div>
 
@@ -732,14 +744,14 @@ export default function VoiceCassette({
             }
             className={`h-[28px] rounded-full border px-[10px] py-1 font-mono text-[10px] uppercase tracking-[0.2em] transition-colors ${
               autoDetect
-                ? "border-[#e8ff00] text-[#e8ff00]"
-                : "border-[#2a2a1a] text-[#6a6a4a]"
+                ? "border-[var(--accent)] text-[var(--accent)]"
+                : "border-[var(--form-border)] text-[var(--muted-tertiary)]"
             }`}
           >
             ◉ AUTO DETECT
           </button>
           {autoDetect && (
-            <p className="text-center font-mono text-[9px] italic text-[#6a6a4a]">
+            <p className="text-center font-mono text-[9px] italic text-[var(--muted-tertiary)]">
               speak in any language — i&apos;ll understand
             </p>
           )}
@@ -751,7 +763,7 @@ export default function VoiceCassette({
               <select
                 value={manualLang}
                 onChange={(event) => setManualLang(event.target.value)}
-                className="h-[36px] w-full appearance-none rounded-[4px] border border-[#2a2a1a] bg-[#0d0d0a] px-3 pr-10 font-mono text-[12px] text-[#f0ede6] outline-none transition-colors focus:border-[#e8ff00]"
+                className="h-[36px] w-full appearance-none rounded-[4px] border border-[var(--form-border)] bg-[var(--form-bg)] px-3 pr-10 font-mono text-[12px] text-[var(--fg)] outline-none transition-colors focus:border-[var(--accent)]"
               >
                 <optgroup label="── INDIA ──">
                   {indiaLanguages.map((lang) => (
@@ -768,7 +780,7 @@ export default function VoiceCassette({
                   ))}
                 </optgroup>
               </select>
-              <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[12px] text-[#e8ff00]">
+              <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[12px] text-[var(--accent)]">
                 ▾
               </span>
             </div>
@@ -776,8 +788,8 @@ export default function VoiceCassette({
         )}
 
         <div className="mt-4">
-          <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#6a6a4a]">COUNTER</p>
-          <div className="mt-2 flex items-center justify-center rounded-md border border-[#1a2a1a] bg-[#0a0f0a] py-2 font-mono text-[18px] tracking-[0.16em] text-[#ccff00]">
+          <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--muted-tertiary)]">COUNTER</p>
+          <div className="mt-2 flex items-center justify-center rounded-md border border-[var(--meter-border)] bg-[var(--meter-bg)] py-2 font-mono text-[18px] tracking-[0.16em] text-[var(--meter-fg)]">
             {formatCounter(counter)}
           </div>
         </div>
@@ -785,7 +797,7 @@ export default function VoiceCassette({
         <div className="mt-4 flex items-center justify-between gap-2">
           <button
             type="button"
-            className="flex h-12 w-9 flex-col items-center justify-center gap-1 rounded-sm border border-[#3a3a2a] bg-[#252515] font-mono text-[8px] uppercase tracking-[0.22em] text-[#f0ede6] shadow-[0_3px_0_#111108] opacity-35"
+            className="flex h-12 w-9 flex-col items-center justify-center gap-1 rounded-sm border border-[var(--control-border)] bg-[var(--control-bg)] font-mono text-[8px] uppercase tracking-[0.22em] text-[var(--fg)] shadow-[0_3px_0_var(--control-shadow)] opacity-35"
             aria-hidden="true"
             tabIndex={-1}
           >
@@ -795,8 +807,8 @@ export default function VoiceCassette({
           <button
             type="button"
             onClick={handlePlay}
-            className={`flex h-12 w-9 flex-col items-center justify-center gap-1 rounded-sm border border-[#3a3a2a] bg-[#252515] font-mono text-[8px] uppercase tracking-[0.22em] text-[#f0ede6] shadow-[0_3px_0_#111108] ${
-              mode === "playing" ? "border-[#44ff44] bg-[#1a3a1a] text-[#44ff44]" : ""
+            className={`flex h-12 w-9 flex-col items-center justify-center gap-1 rounded-sm border border-[var(--control-border)] bg-[var(--control-bg)] font-mono text-[8px] uppercase tracking-[0.22em] text-[var(--fg)] shadow-[0_3px_0_var(--control-shadow)] ${
+              mode === "playing" ? "border-[var(--success)] bg-[var(--success-bg)] text-[var(--success)]" : ""
             }`}
           >
             <span className="text-base">▶</span>
@@ -805,8 +817,8 @@ export default function VoiceCassette({
           <button
             type="button"
             onClick={handleRecordToggle}
-            className={`flex h-12 w-9 flex-col items-center justify-center gap-1 rounded-sm border border-[#3a3a2a] bg-[#252515] font-mono text-[8px] uppercase tracking-[0.22em] text-[#f0ede6] shadow-[0_3px_0_#111108] ${
-              mode === "recording" ? "border-[#ff4444] bg-[#3a1a1a] text-[#ff4444]" : ""
+            className={`flex h-12 w-9 flex-col items-center justify-center gap-1 rounded-sm border border-[var(--control-border)] bg-[var(--control-bg)] font-mono text-[8px] uppercase tracking-[0.22em] text-[var(--fg)] shadow-[0_3px_0_var(--control-shadow)] ${
+              mode === "recording" ? "border-[var(--record)] bg-[var(--record-bg)] text-[var(--record)]" : ""
             }`}
           >
             <span className="text-base">⏺</span>
@@ -815,7 +827,7 @@ export default function VoiceCassette({
           <button
             type="button"
             onClick={handleStop}
-            className={`flex h-12 w-9 flex-col items-center justify-center gap-1 rounded-sm border border-[#3a3a2a] bg-[#252515] font-mono text-[8px] uppercase tracking-[0.22em] text-[#f0ede6] shadow-[0_3px_0_#111108] transition-opacity ${
+            className={`flex h-12 w-9 flex-col items-center justify-center gap-1 rounded-sm border border-[var(--control-border)] bg-[var(--control-bg)] font-mono text-[8px] uppercase tracking-[0.22em] text-[var(--fg)] shadow-[0_3px_0_var(--control-shadow)] transition-opacity ${
               stopFlash ? "opacity-50" : "opacity-100"
             }`}
           >
@@ -824,7 +836,7 @@ export default function VoiceCassette({
           </button>
           <button
             type="button"
-            className="flex h-12 w-9 flex-col items-center justify-center gap-1 rounded-sm border border-[#3a3a2a] bg-[#252515] font-mono text-[8px] uppercase tracking-[0.22em] text-[#f0ede6] shadow-[0_3px_0_#111108] opacity-35"
+            className="flex h-12 w-9 flex-col items-center justify-center gap-1 rounded-sm border border-[var(--control-border)] bg-[var(--control-bg)] font-mono text-[8px] uppercase tracking-[0.22em] text-[var(--fg)] shadow-[0_3px_0_var(--control-shadow)] opacity-35"
             aria-hidden="true"
             tabIndex={-1}
           >
@@ -834,14 +846,14 @@ export default function VoiceCassette({
         </div>
 
         {isMobile && (
-          <p className="mt-2 text-center font-mono text-[9px] uppercase tracking-[0.3em] text-[#6a6a4a]">
+          <p className="mt-2 text-center font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--muted-tertiary)]">
             TAP TO RECORD
           </p>
         )}
 
       </div>
 
-      <div className="ml-auto mt-[10px] block w-fit rounded-[3px] bg-[#e8ff00] px-2 py-1 font-mono text-[8px] uppercase text-[#0a0a0a] [transform:rotate(-1.5deg)] [position:relative] z-0">
+      <div className="ml-auto mt-[10px] block w-fit rounded-[3px] bg-[var(--accent)] px-2 py-1 font-mono text-[8px] uppercase text-[var(--accent-contrast)] [transform:rotate(-1.5deg)] [position:relative] z-0">
         <p>SIDE A</p>
         <p>LEAVE A MESSAGE</p>
       </div>
@@ -851,23 +863,23 @@ export default function VoiceCassette({
           showComposer ? "max-h-[600px] translate-y-0 opacity-100" : "max-h-0 -translate-y-2 opacity-0"
         }`}
       >
-        <div className="rounded-md border border-[#2a2a1a] bg-[#14140f] p-4">
+        <div className="rounded-md border border-[var(--form-border)] bg-[var(--form-card-bg)] p-4">
           {permissionDenied && (
-            <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[#ff6b6b]">
+            <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--error)]">
               microphone access needed
             </p>
           )}
           {errorMessage && !permissionDenied && (
-            <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[#ff6b6b]">
+            <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--error)]">
               {errorMessage}
             </p>
           )}
 
-          <label className="text-[9px] font-mono uppercase tracking-[0.3em] text-[#e8ff00]">
+          <label className="text-[9px] font-mono uppercase tracking-[0.3em] text-[var(--accent)]">
             ENGLISH TRANSLATION — edit if needed
           </label>
           <textarea
-            className={`mt-2 min-h-[120px] w-full resize-none rounded-md border border-[#2a2a1a] bg-[#0d0d0a] px-3 py-2 font-mono text-[12px] text-[#f0ede6] outline-none ${
+            className={`mt-2 min-h-[120px] w-full resize-none rounded-md border border-[var(--form-border)] bg-[var(--form-bg)] px-3 py-2 font-mono text-[12px] text-[var(--fg)] outline-none ${
               isTranslating && !englishDraft ? "translate-pulse" : ""
             }`}
             value={isTranslating && !englishDraft ? "translating..." : englishDraft}
@@ -883,7 +895,7 @@ export default function VoiceCassette({
             placeholder="translation will appear here..."
           />
           {translateError && autoDetect && (
-            <p className="mt-2 text-[10px] font-mono uppercase tracking-[0.22em] text-[#ff6b6b]">
+            <p className="mt-2 text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--error)]">
               couldn&apos;t translate — you can edit manually
             </p>
           )}
@@ -891,18 +903,18 @@ export default function VoiceCassette({
           <button
             type="button"
             onClick={() => setShowOriginal((prev) => !prev)}
-            className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[#6a6a6a] hover:text-[#e8ff00]"
+            className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--muted-tertiary)] hover:text-[var(--accent)]"
           >
             {showOriginal ? "hide original ←" : "show original →"}
           </button>
 
           {showOriginal && (
             <div className="mt-3">
-              <label className="text-[9px] font-mono uppercase tracking-[0.3em] text-[#6a6a4a]">
+              <label className="text-[9px] font-mono uppercase tracking-[0.3em] text-[var(--muted-tertiary)]">
                 ORIGINAL ({originalLangName})
               </label>
               <textarea
-                className="mt-2 min-h-[100px] w-full resize-none rounded-md border border-[#2a2a1a] bg-[#0d0d0a] px-3 py-2 font-mono text-[12px] text-[#f0ede6]/80 outline-none"
+                className="mt-2 min-h-[100px] w-full resize-none rounded-md border border-[var(--form-border)] bg-[var(--form-bg)] px-3 py-2 font-mono text-[12px] text-[var(--muted)] outline-none"
                 value={transcription}
                 readOnly
               />
@@ -913,7 +925,7 @@ export default function VoiceCassette({
             <button
               type="button"
               onClick={handleRetake}
-              className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff6b6b]/80"
+              className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--error)] opacity-80 hover:opacity-100"
             >
               ✕ retake
             </button>

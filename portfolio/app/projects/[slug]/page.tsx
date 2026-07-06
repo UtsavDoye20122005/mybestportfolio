@@ -66,7 +66,7 @@ export default function ProjectCaseStudyPage({
             </p>
           </div>
           <div className="p-5 md:p-6">
-            <p className="font-mono text-sm leading-7 text-[var(--fg)]/85">{project.problem}</p>
+            <p className="font-mono text-sm leading-7 text-[var(--muted)]">{project.problem}</p>
           </div>
 
           <div className="p-5 md:p-6 border-t border-[var(--rule)] md:border-t-0">
@@ -75,7 +75,7 @@ export default function ProjectCaseStudyPage({
             </p>
           </div>
           <div className="p-5 md:p-6 border-t border-[var(--rule)] md:border-t-0">
-            <p className="font-mono text-sm leading-7 text-[var(--fg)]/85">{project.solution}</p>
+            <p className="font-mono text-sm leading-7 text-[var(--muted)]">{project.solution}</p>
           </div>
 
           <div className="p-5 md:p-6 border-t border-[var(--rule)] md:border-t-0">
@@ -84,7 +84,7 @@ export default function ProjectCaseStudyPage({
             </p>
           </div>
           <div className="p-5 md:p-6 border-t border-[var(--rule)] md:border-t-0">
-            <p className="font-mono text-sm leading-7 text-[var(--fg)]/85">{project.result}</p>
+            <p className="font-mono text-sm leading-7 text-[var(--muted)]">{project.result}</p>
           </div>
 
           <div className="p-5 md:p-6 border-t border-[var(--rule)] md:border-t-0">
@@ -97,7 +97,7 @@ export default function ProjectCaseStudyPage({
               {project.stack.map((t) => (
                 <span
                   key={t}
-                  className="inline-flex items-center border border-[var(--rule)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--fg)]/85"
+                  className="inline-flex items-center border border-[var(--rule)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--fg)]"
                 >
                   {t}
                 </span>
@@ -117,7 +117,7 @@ export default function ProjectCaseStudyPage({
           <div className="flex items-center gap-6">
             <a
               href={project.githubUrl}
-              className="inline-flex font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)]/85 hover:text-[var(--fg)]"
+              className="inline-flex font-mono text-xs uppercase tracking-[0.28em] text-[var(--muted)] hover:text-[var(--fg)]"
               target="_blank"
               rel="noreferrer"
             >
@@ -137,4 +137,3 @@ export default function ProjectCaseStudyPage({
     </section>
   );
 }
-

@@ -42,7 +42,7 @@ function ProjectCard({ project, isTop, dragHandlers }: any) {
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative flex h-full w-full flex-col justify-between border border-[var(--rule)] bg-[#0a0a0a] p-6 shadow-2xl overflow-hidden ${isTop ? 'cursor-grab active:cursor-grabbing' : ''}`}
+      className={`relative flex h-full w-full flex-col justify-between border border-[var(--rule)] bg-[var(--card-bg)] p-6 shadow-2xl overflow-hidden ${isTop ? 'cursor-grab active:cursor-grabbing' : ''}`}
       style={{ transformStyle: "preserve-3d", willChange: "transform", backfaceVisibility: "hidden" }}
       {...(isTop ? dragHandlers : {})}
     >
@@ -69,7 +69,7 @@ function ProjectCard({ project, isTop, dragHandlers }: any) {
           {project.stack.map((t: string) => (
             <span
               key={t}
-              className="inline-flex box-border items-center border border-[var(--rule)] px-[10px] py-[4px] font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--fg)]/85"
+              className="inline-flex box-border items-center border border-[var(--rule)] px-[10px] py-[4px] font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--fg)]"
             >
               {t}
             </span>

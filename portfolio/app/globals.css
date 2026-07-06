@@ -4,8 +4,33 @@
   --bg: #0a0a0a;
   --fg: #f0ede6;
   --muted: rgba(240, 237, 230, 0.72);
+  --muted-secondary: rgba(240, 237, 230, 0.55);
+  --muted-tertiary: rgba(240, 237, 230, 0.4);
+  --muted-quaternary: rgba(240, 237, 230, 0.28);
   --rule: rgba(240, 237, 230, 0.14);
   --accent: #e8ff00;
+  --accent-contrast: #111111;
+  --card-bg: #111111;
+  --card-border: #2a2a2a;
+  --subtle-bg: rgba(255, 255, 255, 0.01);
+  --form-bg: #0d0d0a;
+  --form-card-bg: #11110d;
+  --form-border: #2a2a1a;
+  --form-button-text: var(--accent-contrast);
+  --error: #ff6b6b;
+  --success: #54f26d;
+  --success-bg: #123018;
+  --record: #ff5b5b;
+  --record-bg: #341515;
+  --cassette-reel: #2a2a1a;
+  --cassette-reel-line: #3a3a2a;
+  --control-bg: #252515;
+  --control-border: #3a3a2a;
+  --control-shadow: #111108;
+  --meter-bg: #0a0f0a;
+  --meter-border: #1a2a1a;
+  --meter-fg: #ccff00;
+  --elevated-shadow: 0 14px 40px rgba(0, 0, 0, 0.38);
 }
 
 @theme inline {
@@ -26,11 +51,36 @@ html {
 }
 
 [data-theme='paper'] {
-  --bg: #f5f0e8;
-  --fg: #1a1a1a;
-  --muted: rgba(26, 26, 26, 0.72);
-  --rule: rgba(26, 26, 26, 0.14);
-  --accent: #8a7a00;
+  --bg: #f7f3ea;
+  --fg: #201b16;
+  --muted: rgba(32, 27, 22, 0.76);
+  --muted-secondary: rgba(32, 27, 22, 0.62);
+  --muted-tertiary: rgba(32, 27, 22, 0.48);
+  --muted-quaternary: rgba(32, 27, 22, 0.28);
+  --rule: rgba(32, 27, 22, 0.16);
+  --accent: #8f5715;
+  --accent-contrast: #fffaf1;
+  --card-bg: #fffaf1;
+  --card-border: #ded5c8;
+  --subtle-bg: rgba(143, 87, 21, 0.06);
+  --form-bg: #f1eadf;
+  --form-card-bg: #fffaf1;
+  --form-border: #d7ccb9;
+  --form-button-text: var(--accent-contrast);
+  --error: #b84035;
+  --success: #1f7a3c;
+  --success-bg: #e4f3e8;
+  --record: #bf3a35;
+  --record-bg: #fae5e1;
+  --cassette-reel: #d2c3ad;
+  --cassette-reel-line: #9d866a;
+  --control-bg: #eee1cd;
+  --control-border: #b9a78e;
+  --control-shadow: #9f8d72;
+  --meter-bg: #201b16;
+  --meter-border: #5d513f;
+  --meter-fg: #f4c867;
+  --elevated-shadow: 0 14px 34px rgba(71, 52, 28, 0.18);
 }
 
 body {
@@ -74,7 +124,8 @@ body > * {
 
 /* Selection */
 ::selection {
-  background: rgba(232, 255, 0, 0.22);
+  background: var(--accent);
+  opacity: 0.22;
 }
 
 /* Links */
@@ -192,16 +243,16 @@ button {
 
 /* Terminal section */
 .terminal__window {
-  background: #111111;
-  border: 1px solid #2a2a2a;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
 }
 .terminal__topbar {
   display: flex;
   align-items: center;
   position: relative;
   padding: 10px 16px;
-  border-bottom: 1px solid #2a2a2a;
-  background: #1a1a1a;
+  border-bottom: 1px solid var(--card-border);
+  background: var(--card-bg);
 }
 .terminal__dots {
   display: inline-flex;
@@ -301,7 +352,7 @@ button {
   font-size: 12px;
   line-height: 1.7;
   letter-spacing: 0.02em;
-  color: rgba(240, 237, 230, 0.72);
+  color: var(--muted);
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -313,20 +364,20 @@ button {
   align-items: center;
   gap: 6px;
   padding: 10px 12px 12px;
-  border-top: 1px solid #2a2a2a;
+  border-top: 1px solid var(--card-border);
 }
 .terminal__input {
   flex: 1;
   background: transparent;
   border: 0;
   outline: none;
-  color: rgba(240, 237, 230, 0.92);
+  color: var(--fg);
   font-family: var(--font-mono);
   font-size: 16px;
   letter-spacing: 0.02em;
 }
 .terminal__input::placeholder {
-  color: rgba(240, 237, 230, 0.4);
+  color: var(--muted-tertiary);
 }
 .terminal__cursor {
   width: 0.65ch;
@@ -367,19 +418,19 @@ button {
   animation: availabilityPulse 2s ease-in-out infinite;
 }
 .availability__dot--off {
-  color: rgba(240, 237, 230, 0.28);
+  color: var(--muted-quaternary);
 }
 .availability__text {
   font-size: 14px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.72);
+  color: var(--muted);
 }
 .availability__meta {
   margin-top: 8px;
   font-size: 13px;
   letter-spacing: 0.08em;
-  color: rgba(240, 237, 230, 0.55);
+  color: var(--muted-secondary);
 }
 
 /* Custom scrollbar (CSS only) */
@@ -396,11 +447,12 @@ button {
   background: var(--bg);
 }
 *::-webkit-scrollbar-thumb {
-  background: rgba(232, 255, 0, 0.7);
+  background: var(--accent);
   border: 3px solid var(--bg);
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: rgba(232, 255, 0, 0.9);
+  background: var(--accent);
+  opacity: 0.8;
 }
 
 /* The only animation allowed: blinking cursor. */
@@ -464,13 +516,13 @@ button {
   border: 0;
   padding: 0;
   border-radius: 2px;
-  background: #1a1a1a;
+  background: var(--card-bg);
   cursor: none;
 }
 .heatmap__cell--skeleton {
   display: inline-block;
   opacity: 0.65;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.06);
   animation: heatmapPulse 1.2s ease-in-out infinite;
 }
 @keyframes heatmapPulse {
@@ -486,9 +538,9 @@ button {
   position: fixed;
   z-index: 10000;
   padding: 8px 10px;
-  border: 1px solid rgba(232, 255, 0, 0.28);
-  background: rgba(10, 10, 10, 0.96);
-  color: rgba(240, 237, 230, 0.82);
+  border: 1px solid var(--rule);
+  background: var(--card-bg);
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.12em;
@@ -502,7 +554,7 @@ button {
   font-family: var(--font-mono);
 }
 .changelog__rule {
-  color: rgba(240, 237, 230, 0.22);
+  color: var(--muted-quaternary);
   letter-spacing: 0.06em;
 }
 .changelog__row {
@@ -520,18 +572,18 @@ button {
   white-space: nowrap;
 }
 .changelog__date {
-  color: rgba(240, 237, 230, 0.55);
+  color: var(--muted-secondary);
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   white-space: nowrap;
 }
 .changelog__arrow {
-  color: rgba(232, 255, 0, 0.42);
+  color: var(--muted-quaternary);
   font-size: 12px;
 }
 .changelog__desc {
-  color: rgba(240, 237, 230, 0.82);
+  color: var(--muted);
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -573,14 +625,14 @@ button {
   width: 44px;
   height: 44px;
   border-radius: 9999px;
-  border: 1px solid #2a2a2a;
-  background: #1a1a1a;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
   display: grid;
   place-items: center;
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.18em;
-  color: rgba(240, 237, 230, 0.75);
+  color: var(--muted-secondary);
 }
 .testimonial__name {
   font-family: var(--font-mono);
@@ -591,8 +643,8 @@ button {
 }
 .testimonial__bubble {
   margin-top: 8px;
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   padding: 14px 16px;
   border-radius: 16px;
 }
@@ -600,7 +652,7 @@ button {
   margin: 0;
   font-family: var(--font-sans);
   font-style: italic;
-  color: rgba(240, 237, 230, 0.9);
+  color: var(--muted);
   line-height: 1.6;
 }
 @media (max-width: 768px) {
@@ -615,7 +667,7 @@ button {
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.6);
+  color: var(--muted-secondary);
   display: inline-flex;
   align-items: baseline;
   gap: 8px;
@@ -629,7 +681,7 @@ button {
   color: var(--accent);
 }
 .now-playing__sep {
-  color: rgba(232, 255, 0, 0.35);
+  color: var(--muted-quaternary);
 }
 .now-playing__text {
   max-width: 420px;
@@ -641,7 +693,7 @@ button {
 .ticker {
   overflow: hidden;
   border: 1px solid var(--rule);
-  background: rgba(255, 255, 255, 0.01);
+  background: var(--subtle-bg);
 }
 .ticker__track {
   display: flex;
@@ -658,7 +710,7 @@ button {
   font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.4);
+  color: var(--muted-tertiary);
   white-space: nowrap;
 }
 .ticker__dot {
@@ -676,7 +728,7 @@ button {
 /* Spotify + playlist catalog */
 .spotify-embed {
   border: 1px solid var(--rule);
-  background: rgba(255, 255, 255, 0.01);
+  background: var(--subtle-bg);
   padding: 10px;
 }
 .spotify-embed iframe {
@@ -696,8 +748,8 @@ button {
   align-items: baseline;
 }
 .playlist__row:hover {
-  background: rgba(232, 255, 0, 0.03);
-  border-left-color: rgba(232, 255, 0, 0.35);
+  background: var(--subtle-bg);
+  border-left-color: var(--muted-quaternary);
 }
 .playlist__num {
   font-family: var(--font-mono);
@@ -711,20 +763,20 @@ button {
   font-family: var(--font-sans);
   font-size: 18px;
   letter-spacing: -0.01em;
-  color: rgba(240, 237, 230, 0.92);
+  color: var(--fg);
 }
 .playlist__genre {
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.55);
+  color: var(--muted-secondary);
   white-space: nowrap;
 }
 .playlist__arrow {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: rgba(240, 237, 230, 0.55);
+  color: var(--muted-secondary);
 }
 @media (max-width: 640px) {
   .playlist__row {
@@ -760,8 +812,8 @@ button {
   pointer-events: none;
   opacity: 0.05;
   background-image:
-    linear-gradient(rgba(240, 237, 230, 0.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(240, 237, 230, 0.4) 1px, transparent 1px);
+    linear-gradient(var(--fg) 1px, transparent 1px),
+    linear-gradient(90deg, var(--fg) 1px, transparent 1px);
   background-size: 28px 28px;
   background-position: -1px -1px;
 }
@@ -770,7 +822,7 @@ button {
   width: 100%;
   height: min(880px, 120vw);
   border: 1px solid var(--rule);
-  background: rgba(255, 255, 255, 0.01);
+  background: var(--subtle-bg);
   overflow: hidden;
 }
 .journey__svg {
@@ -789,11 +841,11 @@ button {
   stroke: var(--accent);
 }
 .journey__path--edge {
-  stroke: rgba(232, 255, 0, 0.22);
+  stroke: var(--muted-quaternary);
   stroke-dasharray: 10 10;
 }
 .journey__chevrons {
-  fill: rgba(232, 255, 0, 0.28);
+  fill: var(--muted-quaternary);
 }
 .journey__node {
   position: absolute;
@@ -805,7 +857,7 @@ button {
   width: 52px;
   height: 52px;
   border-radius: 9999px;
-  background: #111;
+  background: var(--card-bg);
   border: 2px solid var(--accent);
   display: grid;
   place-items: center;
@@ -814,7 +866,7 @@ button {
 .journey__node--start .journey__circle {
   background: var(--accent);
   border-color: var(--accent);
-  color: #0a0a0a;
+  color: var(--bg);
 }
 .journey__node--future .journey__circle {
   border-style: dashed;
@@ -830,7 +882,7 @@ button {
     box-shadow: 0 0 0 rgba(232, 255, 0, 0);
   }
   50% {
-    box-shadow: 0 0 18px rgba(232, 255, 0, 0.22);
+    box-shadow: 0 0 18px var(--accent);
   }
 }
 .journey__card {
@@ -839,8 +891,8 @@ button {
   position: absolute;
   width: 260px;
   max-width: min(260px, calc(100vw - 96px));
-  background: #111;
-  border: 1px solid #2a2a2a;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   padding: 12px 14px;
   border-radius: 14px;
   opacity: 0;
@@ -856,7 +908,7 @@ button {
   font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.6);
+  color: var(--muted-secondary);
 }
 .journey__title {
   margin-top: 6px;
@@ -864,19 +916,19 @@ button {
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(240, 237, 230, 0.85);
+  color: var(--muted);
 }
 .journey__desc {
   margin-top: 6px;
   font-family: var(--font-mono);
   font-size: 12px;
   line-height: 1.6;
-  color: rgba(240, 237, 230, 0.6);
+  color: var(--muted-secondary);
 }
 .journey__mobile {
   display: none;
   border: 1px solid var(--rule);
-  background: rgba(255, 255, 255, 0.01);
+  background: var(--subtle-bg);
   padding: 16px 14px;
 }
 .journey__timeline {
@@ -894,7 +946,7 @@ button {
   width: 52px;
   height: 52px;
   border-radius: 9999px;
-  background: #111;
+  background: var(--card-bg);
   border: 2px solid var(--accent);
   display: grid;
   place-items: center;
@@ -902,7 +954,7 @@ button {
 }
 .journey__ticon--start {
   background: var(--accent);
-  color: #0a0a0a;
+  color: var(--bg);
 }
 .journey__ticon--future {
   border-style: dashed;
@@ -912,8 +964,8 @@ button {
   animation: nowGlow 2.4s ease-in-out infinite;
 }
 .journey__tcard {
-  background: #111;
-  border: 1px solid #2a2a2a;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   padding: 12px 14px;
   border-radius: 14px;
 }
