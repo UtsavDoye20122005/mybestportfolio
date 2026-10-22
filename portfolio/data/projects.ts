@@ -2,7 +2,7 @@ export type Project = {
   slug: string;
   title: string;
   issueNumber: string;
-  category: "Product" | "Campus tool" | "Client site" | "Experiment" | "Early build";
+  category: "Product" | "Campus tool" | "Experiment" | "Early build";
   problem: string;
   solution: string;
   result: string;
@@ -25,19 +25,19 @@ const GH = "https://github.com/UtsavDoye20122005";
 
 export const projects: Project[] = [
   {
-    slug: "realty-crm",
-    title: "Realty CRM",
+    slug: "estatedesk",
+    title: "EstateDesk",
     issueNumber: "#001",
     category: "Product",
     oneLiner:
-      "A lead-management CRM for real-estate agents, built around the daily problems of a working agent.",
+      "A 15,000-line sales CRM built for a real estate firm, in daily use by its agents.",
     problem:
-      "Real-estate agents track leads, site visits and property inventory across notebooks, WhatsApp and spreadsheets. Leads go cold because nobody remembers to follow up.",
+      "Leads came in from 99acres, MagicBricks, Housing.com, ads and the website, and buyers waited while agents sorted out who should call them. Call notes and follow-ups lived in people's heads.",
     solution:
-      "Built a CRM that keeps every lead, follow-up and property in one place, and pulls inventory straight from a live Google Sheet link that stays in sync.",
+      "Pulls leads from every source within seconds, merges duplicates and gives each new lead to the agent with the fewest open leads. After a call, agents speak a voice note in Hindi or English and AI fills in the outcome, budget, next call and site visit. Buyers get home shortlists on WhatsApp, with alerts when they open them.",
     result:
-      "Deployed and being shaped with a real agent's office. Next step: daily use there, then selling it to other agents.",
-    stack: ["Next.js", "TypeScript", "Google Sheets sync", "Vercel"],
+      "In daily use at TrustArc Estates and still growing. Also tracks inventory, deals and commission.",
+    stack: ["Next.js", "TypeScript", "Supabase", "Gemini API", "WhatsApp", "Vercel"],
     liveUrl: "",
     githubUrl: "",
     isPrivate: true,
@@ -54,18 +54,18 @@ export const projects: Project[] = [
     solution:
       "You talk or type, and it writes the questions, picks the right input for each one, sets deadlines from speech, and gives you a link. Multi-page forms, saved half-finished answers, and Postgres rules that refuse late or flooded submissions.",
     result:
-      "Live, with accounts and charts, and built to hold up when a whole class submits at once on one Wi-Fi.",
-    stack: ["Next.js", "Supabase", "Postgres", "Groq", "Vercel"],
+      "Live, with Google and email sign-in, private per-user data, workspaces, analytics and Google Sheets export. Tested with 60 people submitting at the same time.",
+    stack: ["Next.js", "Supabase", "Claude API", "Google Sheets API", "Vercel"],
     liveUrl: "https://formagent-web.vercel.app",
     githubUrl: `${GH}/formagent`,
   },
   {
-    slug: "nst-room-board",
-    title: "NST Room Board",
+    slug: "room-board",
+    title: "Campus Room Board",
     issueNumber: "#003",
     category: "Campus tool",
     oneLiner:
-      "Classroom and exam room booking for the NST campus. Teachers book a room, nobody can double-book it, and students see where to go.",
+      "Classroom and exam room booking for my college campus. Teachers book a room, nobody can double-book it, and students see where to go.",
     problem:
       "Rooms on campus were booked by word of mouth, so two classes could land in the same room and students didn't know where their exam was.",
     solution:
@@ -77,29 +77,43 @@ export const projects: Project[] = [
     githubUrl: `${GH}/nst-room-board`,
   },
   {
-    slug: "nst-exam-seating",
-    title: "NST Exam Seating",
+    slug: "hall-shuffle",
+    title: "Hall Shuffle",
     issueNumber: "#004",
     category: "Campus tool",
     oneLiner:
-      "Reshuffles exam seating in one click while following the college's bench rules, and exports the plan as a PDF.",
-    problem:
-      "Teachers at my college were seating and reshuffling students for every exam by hand.",
+      "Reseats a 368-seat exam hall in one click so no two students from the same year sit together.",
+    problem: "Teachers at my college were seating and reshuffling students for every exam by hand.",
     solution:
-      "Load the hall layout, press Shuffle, and it reseats everyone following the junior-senior bench rules. Highlight by year, edit seats, and download the plan as a PDF. Real seating is locked behind a passcode.",
-    result:
-      "Turns a slow manual job into a few clicks, without putting student data on the open web.",
-    stack: ["JavaScript", "PDF export", "Vercel"],
+      "Seating rules are written as constraints (bench pattern, column order, year mix), so one click gives a valid new layout. Student data is passcode-locked, and plans export as PDF or CSV.",
+    result: "A job that took teachers hours now takes one click.",
+    stack: ["JavaScript", "Constraint logic", "PDF/CSV export"],
     liveUrl: "",
     githubUrl: "",
     isPrivate: true,
   },
   {
-    slug: "nst-hostel-pulse",
-    title: "NST Hostel Pulse",
+    slug: "hazri",
+    title: "Hazri",
     issueNumber: "#005",
+    category: "Product",
+    oneLiner:
+      "Face-recognition attendance: one class photo marks everyone present, a second photo flags who left early.",
+    problem: "Calling out 60 names takes a chunk of every class, and proxy attendance is easy.",
+    solution:
+      "The teacher takes one photo of the class. The app finds and matches every face against the class list. A second photo later flags students who left early.",
+    result: "Attendance for a class of 60 from a single photo.",
+    stack: ["Python", "FastAPI", "React Native", "Face recognition"],
+    liveUrl: "",
+    githubUrl: "",
+    isPrivate: true,
+  },
+  {
+    slug: "hostel-pulse",
+    title: "Hostel Pulse",
+    issueNumber: "#006",
     category: "Campus tool",
-    oneLiner: "A web app for hostel life on the NST campus.",
+    oneLiner: "A web app for hostel life on my college campus.",
     problem:
       "Hostel updates and issues on campus were scattered across chats and notice boards.",
     solution:
@@ -113,7 +127,7 @@ export const projects: Project[] = [
   {
     slug: "pocket-terminal",
     title: "Pocket Terminal",
-    issueNumber: "#006",
+    issueNumber: "#007",
     category: "Experiment",
     oneLiner:
       "My Mac's terminal on my phone, from any network, even with the lid closed, while using as little battery as possible.",
@@ -131,7 +145,7 @@ export const projects: Project[] = [
   {
     slug: "reflect-slack-bot",
     title: "Reflect (Slack bot)",
-    issueNumber: "#007",
+    issueNumber: "#008",
     category: "Product",
     oneLiner:
       "A Slack bot that turns a teacher's two-minute voice note into their written class reflection, using only what they said.",
@@ -145,134 +159,9 @@ export const projects: Project[] = [
     githubUrl: `${GH}/reflectbot-slack`,
   },
   {
-    slug: "gulmohar-kitchen",
-    title: "Gulmohar Kitchen",
-    issueNumber: "#008",
-    category: "Client site",
-    oneLiner:
-      "Restaurant website for a North Indian and Continental dining room in Nashik, with menu and table reservations.",
-    problem:
-      "Small restaurants need a fast site with the menu, hours and a booking form, not a slow template.",
-    solution:
-      "Built a reusable site where all text, prices and images live in typed content files, so it can be rebranded for a new client without touching the code.",
-    result: "A proof-of-work site for restaurant clients.",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Zod"],
-    liveUrl: "https://gulmohar-kitchen.vercel.app",
-    githubUrl: `${GH}/gulmohar-kitchen`,
-  },
-  {
-    slug: "sushrut-dental",
-    title: "Sushrut Dental",
-    issueNumber: "#009",
-    category: "Client site",
-    oneLiner:
-      "Website for a specialist dental clinic in Indore, with treatments, doctors and appointment booking.",
-    problem: "Clinics lose patients when their site is slow or makes booking hard.",
-    solution:
-      "Built a clean clinic site with a validated booking form and all content in typed files, ready to swap in a real clinic.",
-    result: "A proof-of-work site for healthcare clients.",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Zod"],
-    liveUrl: "https://sushrut-dental.vercel.app",
-    githubUrl: `${GH}/sushrut-dental`,
-  },
-  {
-    slug: "pragati-classes",
-    title: "Pragati Classes",
-    issueNumber: "#010",
-    category: "Client site",
-    oneLiner:
-      "Website for a JEE, NEET and Foundation coaching institute in Patna, with courses, fees, faculty and results.",
-    problem:
-      "Parents compare coaching institutes online and need courses, fees and results in one clear place.",
-    solution:
-      "Built a site with course comparison, syllabus, batch dates and an enquiry form, all driven from content files.",
-    result: "A proof-of-work site for coaching-institute clients.",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Zod"],
-    liveUrl: "https://pragati-classes.vercel.app",
-    githubUrl: `${GH}/pragati-classes`,
-  },
-  {
-    slug: "aadhar-realty",
-    title: "Aadhar Realty",
-    issueNumber: "#011",
-    category: "Client site",
-    oneLiner:
-      "Website for a real-estate agency in Lucknow that shows homes along with their paperwork.",
-    problem: "Home buyers don't trust listings that hide the legal details.",
-    solution:
-      "Built a listings site that puts the documents next to each property, with all content in typed files.",
-    result: "A proof-of-work site for real-estate clients.",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://aadhar-realty.vercel.app",
-    githubUrl: `${GH}/aadhar-realty`,
-  },
-  {
-    slug: "ironhouse-jaipur",
-    title: "Ironhouse Strength Co.",
-    issueNumber: "#012",
-    category: "Client site",
-    oneLiner: "Website for a strength-training gym in Vaishali Nagar, Jaipur.",
-    problem: "Local gyms need a site that shows coaching, plans and location quickly.",
-    solution:
-      "Built a bold gym site with plans, coaches and a map, with all content in typed files so it can be rebranded.",
-    result: "A proof-of-work site for fitness clients.",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://ironhouse-jaipur.vercel.app",
-    githubUrl: `${GH}/ironhouse-jaipur`,
-  },
-  {
-    slug: "nebula-gallery",
-    title: "Nebula Gallery",
-    issueNumber: "#013",
-    category: "Experiment",
-    oneLiner:
-      "An infinite cosmic canvas built with vanilla HTML/CSS/JS — mood-filtered artwork, auto-tour mode, generative ambience, and visitor submissions.",
-    problem:
-      "Static grid galleries felt stale. The goal was a free-form space that feels like exploring a digital nebula instead of clicking through cards.",
-    solution:
-      "Built an explorable pan-and-zoom canvas, mood-based filtering, ambient generative soundscapes, and a submission flow so visitors can add their own artwork.",
-    result:
-      "A unique gallery experience with no framework overhead and discovery through motion, mood and sound.",
-    stack: ["HTML5", "CSS3", "Vanilla JavaScript"],
-    liveUrl: "https://art-gallery-phi-beryl.vercel.app",
-    githubUrl: `${GH}/Art-gallery`,
-  },
-  {
-    slug: "prime-ledger",
-    title: "Prime Ledger",
-    issueNumber: "#014",
-    category: "Experiment",
-    oneLiner:
-      "A React + Vite case-study site that presents business results in a clean dark-mode interface.",
-    problem:
-      "Business success stories were hard to scan and had no clear structure for decision-makers.",
-    solution:
-      "Built a Tailwind React/Vite app with a case-study layout, consistent dark UI, and component-based pages for fast loads.",
-    result: "A clean, easy-to-scan site that keeps visitors focused on impact.",
-    stack: ["React", "Vite", "Tailwind CSS", "JavaScript"],
-    liveUrl: "https://prime-ledger-2-t2cb.vercel.app",
-    githubUrl: `${GH}/Prime-ledger-2`,
-  },
-  {
-    slug: "senparis",
-    title: "Senparis",
-    issueNumber: "#015",
-    category: "Experiment",
-    oneLiner:
-      "A luxury fashion brand site taken from Figma to production with React, TypeScript and Vite.",
-    problem:
-      "High-end brand designs need pixel-perfect translation and code that stays easy to maintain.",
-    solution:
-      "Turned a detailed Figma design into a type-safe React codebase with refined typography and reusable components.",
-    result: "A production-ready fashion site that stays true to the design.",
-    stack: ["React", "TypeScript", "Vite", "CSS"],
-    liveUrl: "https://senparis-seven.vercel.app",
-    githubUrl: `${GH}/senparis`,
-  },
-  {
     slug: "rural-telehealth-connect",
     title: "Rural Telehealth Connect",
-    issueNumber: "#016",
+    issueNumber: "#009",
     category: "Product",
     oneLiner:
       "AI-powered telemedicine for rural healthcare — symptom triage, offline prescriptions and low-bandwidth consultations. Built at Smart India Hackathon 2025.",
@@ -290,7 +179,7 @@ export const projects: Project[] = [
   {
     slug: "internship-agent",
     title: "Internship Opportunity Agent",
-    issueNumber: "#017",
+    issueNumber: "#010",
     category: "Experiment",
     oneLiner:
       "An AI agent that scans internship listings and ranks them against my skills so I only apply to the best fits.",
@@ -307,7 +196,7 @@ export const projects: Project[] = [
   {
     slug: "adult-customer-filter-system",
     title: "Customer Filter System",
-    issueNumber: "#018",
+    issueNumber: "#011",
     category: "Early build",
     oneLiner:
       "A Python tool that filters customer data to find target segments by age and other demographics.",
@@ -321,46 +210,17 @@ export const projects: Project[] = [
     githubUrl: "",
     isPrivate: true,
   },
-  {
-    slug: "phantom-strike",
-    title: "Phantom Strike",
-    issueNumber: "#019",
-    category: "Early build",
-    oneLiner:
-      "My first-semester project: a multi-page landing site for a tactical FPS game, with agents, stats and a store.",
-    problem: "First-semester brief: build a complete multi-page website with plain HTML and CSS.",
-    solution:
-      "Built five linked pages (home, agents, stats, store, contact) with a game-style visual theme.",
-    result: "My first fully deployed multi-page site.",
-    stack: ["HTML5", "CSS3"],
-    liveUrl: "https://first-semester-project-navy.vercel.app",
-    githubUrl: `${GH}/First-semester-project-`,
-  },
-  {
-    slug: "tip-calculator",
-    title: "Tip Calculator",
-    issueNumber: "#020",
-    category: "Early build",
-    oneLiner: "A small tip and bill-split calculator in vanilla JavaScript.",
-    problem: "Working out the tip and each person's share quickly at the table.",
-    solution: "Enter the bill, tip percent and number of people; it shows the tip and the amount per person.",
-    result: "A simple, fast utility and an early JavaScript practice project.",
-    stack: ["HTML5", "CSS3", "JavaScript"],
-    liveUrl: "https://tip-calculator-hazel-iota.vercel.app",
-    githubUrl: `${GH}/Tip-calculator`,
-  },
 ];
 
 const FEATURED = [
-  "realty-crm",
+  "estatedesk",
   "jiffythat",
-  "nst-room-board",
-  "nst-exam-seating",
+  "hall-shuffle",
+  "hazri",
+  "room-board",
   "pocket-terminal",
   "reflect-slack-bot",
-  "gulmohar-kitchen",
-  "nebula-gallery",
-];
+]
 
 /** Projects shown in the home-page card deck. */
 export const featuredProjects = FEATURED.map((s) => projects.find((p) => p.slug === s)!).filter(Boolean);

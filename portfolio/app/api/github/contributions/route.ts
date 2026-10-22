@@ -4,6 +4,9 @@ import { GITHUB_USERNAME } from "../../../../data/profile";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+const CACHE_SECONDS = 60 * 60;
+const CACHE_HEADERS = { "Cache-Control": `public, s-maxage=${CACHE_SECONDS}, stale-while-revalidate=86400` };
+
 type ApiDay = { date: string; count: number; level: number };
 type ApiWeek = { contributionDays: ApiDay[] };
 type ApiResponse = {
@@ -40,7 +43,7 @@ async function fetchCreatedAt(username: string, token?: string): Promise<string>
       "User-Agent": "portfolio-app",
       Accept: "application/vnd.github+json",
     },
-    cache: "no-store",
+    next: { revalidate: CACHE_SECONDS },
   });
 
   if (!res.ok) {
@@ -53,30 +56,7 @@ async function fetchCreatedAt(username: string, token?: string): Promise<string>
   return createdAt;
 }
 
-async function fetchFromGitHub(username: string, token: string): Promise<ApiResponse> {
-  const createdAt = await fetchCreatedAt(username);
-
-  const query = `
-    query($login: String!, $fromAllTime: DateTime!) {
-      user(login: $login) {
-        allTime: contributionsCollection(from: $fromAllTime) {
-          totalContributions
-        }
-        lastYear: contributionsCollection {
-          contributionCalendar {
-            weeks {
-              contributionDays {
-                date
-                contributionCount
-                contributionLevel
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-
+async function githubGraphQL<T>(token: string, query: string, variables: Record<string, unknown>): Promise<T> {
   const res = await fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {
@@ -84,31 +64,72 @@ async function fetchFromGitHub(username: string, token: string): Promise<ApiResp
       "Content-Type": "application/json",
       "User-Agent": "portfolio-app",
     },
-    body: JSON.stringify({
-      query,
-      variables: { login: username, fromAllTime: createdAt },
-    }),
-    cache: "no-store",
+    body: JSON.stringify({ query, variables }),
+    next: { revalidate: CACHE_SECONDS },
   });
-
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`github graphQL failed (${res.status}): ${text.slice(0, 200)}`);
   }
   const json = await res.json();
+  if (json?.errors?.length) throw new Error(`github graphQL error: ${JSON.stringify(json.errors).slice(0, 200)}`);
+  return json.data as T;
+}
 
-  if (!json?.data?.user) throw new Error("github user not found");
+async function fetchFromGitHub(username: string, token: string): Promise<ApiResponse> {
+  // GitHub only allows a range of up to one year per contributionsCollection,
+  // so all-time totals are summed year by year.
+  const base = await githubGraphQL<{
+    user: {
+      contributionsCollection: {
+        contributionYears: number[];
+        contributionCalendar: { weeks: GraphQlWeek[] };
+      };
+    } | null;
+  }>(
+    token,
+    `query($login: String!) {
+      user(login: $login) {
+        contributionsCollection {
+          contributionYears
+          contributionCalendar {
+            weeks { contributionDays { date contributionCount contributionLevel } }
+          }
+        }
+      }
+    }`,
+    { login: username }
+  );
 
-  const weeks = (json.data.user.lastYear?.contributionCalendar?.weeks ?? []) as GraphQlWeek[];
+  if (!base?.user) throw new Error("github user not found");
+
+  const years = base.user.contributionsCollection.contributionYears ?? [];
+  let totalAllTime = 0;
+  if (years.length) {
+    const fields = years
+      .map(
+        (y) =>
+          `y${y}: contributionsCollection(from: "${y}-01-01T00:00:00Z", to: "${y}-12-31T23:59:59Z") { contributionCalendar { totalContributions } }`
+      )
+      .join("\n");
+    const perYear = await githubGraphQL<{
+      user: Record<string, { contributionCalendar: { totalContributions: number } }>;
+    }>(token, `query($login: String!) { user(login: $login) { ${fields} } }`, { login: username });
+    totalAllTime = Object.values(perYear.user ?? {}).reduce(
+      (sum, c) => sum + (c?.contributionCalendar?.totalContributions ?? 0),
+      0
+    );
+  }
+
+  const weeks = base.user.contributionsCollection.contributionCalendar.weeks ?? [];
   const totalLast12Months = weeks.reduce(
     (sum, w) => sum + w.contributionDays.reduce((s, d) => s + d.contributionCount, 0),
     0
   );
-  const totalAllTime = Number(json.data.user.allTime?.totalContributions ?? totalLast12Months);
 
   return {
     totalLast12Months,
-    totalAllTime,
+    totalAllTime: Math.max(totalAllTime, totalLast12Months),
     contributions: weeks.map((w) => ({
       contributionDays: w.contributionDays.map((d) => ({
         date: d.date,
@@ -176,7 +197,7 @@ async function fetchContributionPage(username: string, from?: string, to?: strin
     headers: {
       "User-Agent": "portfolio-app",
     },
-    cache: "no-store",
+    next: { revalidate: CACHE_SECONDS },
   });
   if (!res.ok) {
     const text = await res.text();
@@ -250,7 +271,7 @@ export async function GET(request: Request) {
       const data = await fetchFromGitHub(username, token);
       return NextResponse.json(
         debug ? { ...data, source: "github", debug: debugInfo } : data,
-        { status: 200 }
+        { status: 200, headers: CACHE_HEADERS }
       );
     }
   } catch (e) {
@@ -262,7 +283,7 @@ export async function GET(request: Request) {
     const data = await fetchFromPublicPage(username);
     return NextResponse.json(
       debug ? { ...data, source: "public", errors, debug: debugInfo } : data,
-      { status: 200 }
+      { status: 200, headers: CACHE_HEADERS }
     );
   } catch (e) {
     errors.push(`public:failed:${(e as Error)?.message ?? "unknown"}`);

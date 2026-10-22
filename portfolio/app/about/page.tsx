@@ -16,22 +16,19 @@ const TechRadar = dynamic(
 );
 
 const stackRows = [
-  {
-    label: "Programming Languages",
-    value: "Python, HTML, CSS, JavaScript, TypeScript",
-  },
-  {
-    label: "Frontend",
-    value: "Next.js, React.js, Tailwind CSS",
-  },
-  {
-    label: "Tools & DevOps",
-    value: "Docker, Git",
-  },
-  {
-    label: "Core Competencies",
-    value: "Algorithm Design, Data Processing, Web Development, Problem Solving",
-  },
+  { label: "Languages", value: "Python, JavaScript, TypeScript, SQL, HTML/CSS" },
+  { label: "Web", value: "React, Next.js, React Native, Node.js, FastAPI, Tailwind CSS, REST APIs" },
+  { label: "AI & Data", value: "Claude, OpenAI and Gemini APIs, AI agents, face recognition, NumPy, pandas" },
+  { label: "Databases", value: "PostgreSQL, Supabase, Firebase" },
+  { label: "Tools", value: "Git, GitHub, Vercel, Figma, Claude Code" },
+  { label: "Core CS", value: "Data structures and algorithms, OOP, DBMS" },
+] as const;
+
+const currently = [
+  { label: "Building", value: "EstateDesk — new features as the sales team uses it every day" },
+  { label: "Learning", value: "Machine learning in depth, and DSA every morning" },
+  { label: "Next up", value: "Fine-tuning a small open model on one task and comparing it with GPT and Claude" },
+  { label: "Leading", value: "The Outgoing Exchange team at AIESEC in Bengaluru" },
 ] as const;
 
 export default function AboutPage() {
@@ -85,11 +82,15 @@ export default function AboutPage() {
         <article className="pt-8 md:pt-10" data-reveal-stagger>
           <div className="space-y-4">
             <p data-reveal className="font-mono text-sm leading-7 text-[var(--muted)]">
-              Hi, I'm <span className="text-[var(--fg)]">Utsav.</span> I'm a full-stack developer based in [your city], currently studying [your degree/field] while building real systems on the side. I care about software that reads clearly — backends that don't break, interfaces that don't make you think.
+              Hi, I&apos;m <span className="text-[var(--fg)]">Utsav</span>, a second-year Computer Science (AI/ML)
+              student in Bengaluru. I learn by building: I find a real problem, ship a working product and put it in
+              front of the people who use it.
             </p>
 
             <p data-reveal className="font-mono text-sm leading-7 text-[var(--muted)]">
-              Outside code I'm usually in the markets, building automation workflows, or deep in a playlist I refuse to skip. I started this portfolio in March 2025 to have somewhere to put everything I'm learning.
+              Right now that means EstateDesk, a sales CRM a real estate firm uses every day, plus small tools for my
+              college like exam seating and room booking. I&apos;m drawn to startups and to how good products grow into
+              lasting businesses. Outside code, I follow the markets and lead a team at AIESEC.
             </p>
           </div>
 
@@ -102,7 +103,7 @@ export default function AboutPage() {
                 {stackRows.map((r) => (
                   <StaggerItem
                     key={r.label}
-                    className="grid grid-cols-1 gap-2 px-4 py-4 sm:grid-cols-[160px_1fr] hover:bg-[var(--subtle-bg)] transition-colors"
+                    className="grid grid-cols-1 gap-2 px-4 py-4 sm:grid-cols-[120px_1fr] hover:bg-[var(--subtle-bg)] transition-colors"
                   >
                     <div className="font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">
                       {r.label}
@@ -124,15 +125,11 @@ export default function AboutPage() {
               Currently
             </h2>
             <ul className="mt-4 space-y-3 border border-[var(--rule)] p-4">
-              <li className="font-mono text-sm leading-7 text-[var(--muted)]">
-                → Learning: <span className="text-[var(--fg)]">Advanced System Design, Web3 basics</span>
-              </li>
-              <li className="font-mono text-sm leading-7 text-[var(--muted)]">
-                → Building: <span className="text-[var(--fg)]">Internship Opportunity Agent & Adult Customer Filter System</span>
-              </li>
-              <li className="font-mono text-sm leading-7 text-[var(--muted)]">
-                → Reading: <span className="text-[var(--fg)]">Reading about AI&ML</span>
-              </li>
+              {currently.map((c) => (
+                <li key={c.label} className="font-mono text-sm leading-7 text-[var(--muted)]">
+                  → {c.label}: <span className="text-[var(--fg)]">{c.value}</span>
+                </li>
+              ))}
             </ul>
           </section>
         </article>

@@ -23,7 +23,14 @@ export async function POST(request: Request) {
   }
 
   const submission = await buildContactSubmission(payload, request);
-  await appendContactSubmission(submission);
+
+  let stored = true;
+  try {
+    await appendContactSubmission(submission);
+  } catch {
+    // On Vercel the filesystem is read-only, so without DATABASE_URL this fails.
+    stored = false;
+  }
 
   const transporter = createMailTransport();
   let emailDelivered = false;
@@ -40,6 +47,13 @@ export async function POST(request: Request) {
     }
   } catch {
     emailDelivered = false;
+  }
+
+  if (!stored && !emailDelivered) {
+    return NextResponse.json(
+      { error: "Couldn't send right now. Please email utsavdoye07@gmail.com directly." },
+      { status: 503 }
+    );
   }
 
   return NextResponse.json({

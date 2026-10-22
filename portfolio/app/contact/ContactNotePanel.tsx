@@ -211,11 +211,13 @@ export default function ContactNotePanel() {
         }),
       });
       if (!response.ok) {
-        throw new Error("send failed");
+        const body = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(body?.error || "send failed");
       }
       setSent(true);
     } catch (error) {
-      setSubmitError("Could not send yet. Try again in a bit.");
+      const message = error instanceof Error && error.message !== "send failed" ? error.message : "";
+      setSubmitError(message || "Couldn't send right now. Please email utsavdoye07@gmail.com directly.");
     } finally {
       setSubmitting(false);
     }

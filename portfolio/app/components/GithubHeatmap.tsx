@@ -4,12 +4,13 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useGithubContributions } from "./useGithubContributions";
 
-function colorForCount(c: number) {
-  if (c <= 0) return "#1a1a1a";
-  if (c <= 3) return "#3a3a1a";
-  if (c <= 6) return "#8a8a00";
-  if (c <= 9) return "#bbbb00";
-  return "#e8ff00";
+// GitHub's own 0–4 levels, scaled against your busiest days, so light days still show.
+const LEVEL_OPACITY = [0, 0.3, 0.5, 0.75, 1];
+
+function cellStyle(level: number, count: number) {
+  const l = count > 0 ? Math.max(1, Math.min(4, level)) : 0;
+  if (l === 0) return { background: "var(--rule)" };
+  return { background: "var(--accent)", opacity: LEVEL_OPACITY[l] };
 }
 
 export function GithubHeatmap({ username }: { username: string }) {
@@ -26,17 +27,18 @@ export function GithubHeatmap({ username }: { username: string }) {
   const totalLast12Months = data?.totalLast12Months;
   const totalAllTime = data?.totalAllTime;
 
-  if (error) return null;
+  const isEmpty = data && (data.contributions?.length ?? 0) === 0;
+  if (error || isEmpty) return null;
 
   return (
-    <section aria-label="GitHub contributions (all time)" className="mt-10" data-reveal>
+    <section aria-label="GitHub contributions" className="mt-10" data-reveal>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h2 className="font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)]">
             CONTRIBUTIONS · LAST 12 MONTHS
           </h2>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--muted)]">
-            Live activity from @{username}
+            Activity from @{username}
           </p>
         </div>
 
@@ -67,13 +69,13 @@ export function GithubHeatmap({ username }: { username: string }) {
                   {week.map((d, di) => {
                     const c = d?.count ?? 0;
                     const date = d?.date ?? "";
-                    const bg = colorForCount(c);
+                    const style = cellStyle(d?.level ?? 0, c);
                     return (
                       <button
                         key={di}
                         type="button"
                         className="heatmap__cell"
-                        style={{ background: bg }}
+                        style={style}
                         onMouseEnter={(e) => {
                           const r = (e.target as HTMLElement).getBoundingClientRect();
                           setHover({
@@ -110,9 +112,13 @@ export function GithubHeatmap({ username }: { username: string }) {
 
       {typeof totalLast12Months === "number" ? (
         <p className="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-          All time: <span className="text-[var(--fg)]">{totalAllTime ?? totalLast12Months}</span>
-          {" · "}
-          Last 12 months: <span className="text-[var(--fg)]">{totalLast12Months}</span>
+          <span className="text-[var(--fg)]">{totalLast12Months}</span> in the last 12 months
+          {typeof totalAllTime === "number" && totalAllTime > totalLast12Months ? (
+            <>
+              {" · "}
+              <span className="text-[var(--fg)]">{totalAllTime}</span> all time
+            </>
+          ) : null}
         </p>
       ) : null}
     </section>
