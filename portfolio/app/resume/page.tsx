@@ -91,7 +91,7 @@ const projects: ProjectItem[] = [
     ],
   },
   {
-    title: "NST Room Board",
+    title: "Room Board",
     stack: "Next.js, Firebase Auth, Firestore, Tailwind CSS",
     bullets: [
       "Campus room and exam booking: teachers book rooms, students see where their next class is",
@@ -100,7 +100,7 @@ const projects: ProjectItem[] = [
     ],
   },
   {
-    title: "NST Exam Seating",
+    title: "Exam Seating",
     stack: "JavaScript, PDF export",
     bullets: [
       "One-click reshuffle of exam seating that follows the college's junior-senior bench rules",

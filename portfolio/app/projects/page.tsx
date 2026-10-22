@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { projects, type Project } from "../../data/projects";
 import { PrivateBadge, ProjectLinks } from "../components/ProjectLinks";
 
-const FILTERS = ["All", "Product", "Campus tool", "Client site", "Experiment", "Early build"] as const;
+const FILTERS = ["All", "Product", "Campus tool", "Experiment", "Early build"] as const;
 type Filter = (typeof FILTERS)[number];
 
 function ProjectCard({ project }: { project: Project }) {
@@ -68,7 +68,7 @@ export default function ProjectsPage() {
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">Selected work</p>
             <h1 className="mt-4 font-sans text-4xl tracking-[-0.02em] sm:text-5xl md:text-6xl">Projects</h1>
             <p className="mt-4 max-w-2xl font-mono text-sm leading-7 text-[var(--muted)]">
-              Products, campus tools, client sites and experiments. Private projects say so instead of showing links.
+              Products, campus tools and experiments. Private projects say so instead of showing links.
             </p>
           </div>
 
