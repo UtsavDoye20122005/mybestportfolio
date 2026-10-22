@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
@@ -16,11 +16,9 @@ const links = [
 
 export function SiteNav() {
   const pathname = usePathname() ?? "/";
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  // Menu remembers the page it was opened on, so it closes itself on navigation.
+  const [openOn, setOpenOn] = useState<string | null>(null);
+  const open = openOn === pathname;
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-[var(--bg)]/90 backdrop-blur-[2px]">
@@ -30,7 +28,7 @@ export function SiteNav() {
       >
         <Link
           href="/"
-          onClick={(e) => {
+          onClick={() => {
             if (pathname === "/") {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }
@@ -53,7 +51,7 @@ export function SiteNav() {
             className="nav-menu-btn font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--fg)]"
             aria-expanded={open}
             aria-controls="mobile-menu"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpenOn(open ? null : pathname)}
           >
             MENU
           </button>

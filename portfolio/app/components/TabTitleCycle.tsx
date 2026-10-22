@@ -10,7 +10,7 @@ const titles = [
   "Utsav Doye — Let's Build Something",
 ];
 
-const awayTitle = "👋 come back — utsav.dev";
+const awayTitle = "👋 come back — Utsav Doye";
 
 export function TabTitleCycle() {
   const currentIndex = useRef(0);

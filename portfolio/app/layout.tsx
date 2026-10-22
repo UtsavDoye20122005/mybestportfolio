@@ -30,11 +30,11 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Utsav Doye — Full Stack Developer",
   description: "I turn complex problems into boring, reliable systems.",
-  metadataBase: new URL("https://utsav.dev"),
+  metadataBase: new URL("https://mybestportfolio-5zua.vercel.app"),
   openGraph: {
     title: "Utsav Doye — Full Stack Developer",
     description: "I turn complex problems into boring, reliable systems.",
-    url: "https://utsav.dev",
+    url: "/",
     siteName: "Utsav Doye",
     locale: "en_US",
     type: "website",

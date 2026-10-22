@@ -46,7 +46,7 @@ const contactItems: ContactItem[] = [
   },
   {
     label: "GitHub",
-    value: "github.com/utsavdoye",
+    value: "github.com/UtsavDoye20122005",
     href: "https://github.com/UtsavDoye20122005",
   },
 ];
@@ -59,7 +59,8 @@ const educationHighlights = [
 
 const skillGroups: SkillGroup[] = [
   { label: "Programming Languages", value: "Python, HTML, CSS, JavaScript, TypeScript" },
-  { label: "Frontend", value: "Next.js, ReactJS, Tailwind CSS" },
+  { label: "Frontend", value: "Next.js, ReactJS, Tailwind CSS, shadcn/ui" },
+  { label: "Backend & Data", value: "Supabase, Postgres, Firebase, Firestore, Node.js" },
   {
     label: "Tools and Technologies",
     value: "Docker, Git, Responsive Design, Code Optimization",
@@ -72,30 +73,38 @@ const skillGroups: SkillGroup[] = [
 
 const projects: ProjectItem[] = [
   {
-    title: "Smart Billing System",
-    stack: "Python",
+    title: "Realty CRM",
+    stack: "Next.js, TypeScript, Google Sheets sync",
     bullets: [
-      "Engineered an automated billing solution to calculate product totals with dynamic pricing logic",
-      "Implemented robust input validation and error handling for enhanced user experience",
-      "Optimized calculation algorithms for scalability with multiple product categories",
+      "Building a lead-management CRM for real-estate agents around the daily problems of a working agent's office",
+      "Keeps leads, follow-ups and property inventory in one place; inventory syncs from a live Google Sheet link",
+      "Private repo; next step is daily use in the office, then selling to other agents",
     ],
   },
   {
-    title: "Adult Customer Filter System",
-    stack: "Python",
+    title: "JiffyThat (FormAgent)",
+    stack: "Next.js, Supabase, Postgres, Groq",
     bullets: [
-      "Developed data filtering application to process customer demographics and identify target segments",
-      "Applied conditional logic and list comprehensions for efficient data manipulation",
-      "Designed modular code structure for easy maintenance and future enhancements",
+      "Voice and text to a shareable form, including Hinglish input and deadlines set from speech",
+      "Multi-page forms, saved half-finished answers and charts of responses, with per-user accounts",
+      "Postgres rules refuse late or flooded submissions so a whole class can submit at once",
     ],
   },
   {
-    title: "Personal Portfolio Website",
-    stack: "HTML5, CSS3",
+    title: "NST Room Board",
+    stack: "Next.js, Firebase Auth, Firestore, Tailwind CSS",
     bullets: [
-      "Created responsive portfolio website showcasing technical projects and professional profile",
-      "Implemented modern UI/UX principles with clean layout and intuitive navigation",
-      "Utilized CSS3 features including flexbox and grid for cross-device compatibility",
+      "Campus room and exam booking: teachers book rooms, students see where their next class is",
+      "Made double booking impossible with Firestore transactions on per-slot lock documents",
+      "Capacity warnings and one-click room changes that email the affected batches",
+    ],
+  },
+  {
+    title: "NST Exam Seating",
+    stack: "JavaScript, PDF export",
+    bullets: [
+      "One-click reshuffle of exam seating that follows the college's junior-senior bench rules",
+      "Year highlighting, seat editing and PDF download; real seating locked behind a passcode",
     ],
   },
 ];

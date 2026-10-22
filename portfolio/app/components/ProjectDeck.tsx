@@ -3,10 +3,19 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import Link from "next/link";
-import { projects } from "../../data/projects";
+import { featuredProjects as projects, type Project } from "../../data/projects";
+import { PrivateBadge, ProjectLinks } from "./ProjectLinks";
 
 // The 3D tilt effect for the top card
-function ProjectCard({ project, isTop, dragHandlers }: any) {
+function ProjectCard({
+  project,
+  isTop,
+  dragHandlers,
+}: {
+  project: Project;
+  isTop: boolean;
+  dragHandlers?: Record<string, unknown>;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -47,9 +56,12 @@ function ProjectCard({ project, isTop, dragHandlers }: any) {
       {...(isTop ? dragHandlers : {})}
     >
       <header className="relative z-10">
-        <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">
-          {project.issueNumber}
-        </p>
+        <div className="flex items-center justify-between gap-3">
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">
+            {project.issueNumber} · {project.category}
+          </p>
+          {project.isPrivate && <PrivateBadge />}
+        </div>
         <h2 className="mt-3 font-sans text-2xl tracking-[-0.02em] sm:text-3xl text-[var(--fg)]">
           <Link
             href={`/projects/${project.slug}`}
@@ -76,32 +88,7 @@ function ProjectCard({ project, isTop, dragHandlers }: any) {
           ))}
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href={project.githubUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-between border border-[var(--rule)] px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)] hover:text-[var(--accent)] transition-colors"
-            draggable={false}
-          >
-            GitHub
-          </Link>
-          {project.liveUrl ? (
-            <Link
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-between border border-[var(--rule)] px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)] hover:text-[var(--accent)] transition-colors"
-              draggable={false}
-            >
-              Live
-            </Link>
-          ) : (
-            <span className="inline-flex items-center justify-between border border-[var(--rule)] px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)] opacity-40 cursor-default">
-              Soon
-            </span>
-          )}
-        </div>
+        <ProjectLinks project={project} className="mt-2" />
       </footer>
     </div>
   );
@@ -129,6 +116,8 @@ export function ProjectDeck() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      const el = e.target as HTMLElement | null;
+      if (el && (el.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(el.tagName))) return;
       if (e.key === "ArrowRight") goNext();
       if (e.key === "ArrowLeft") goPrev();
     };
@@ -136,7 +125,7 @@ export function ProjectDeck() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const handleDragEnd = (event: any, info: PanInfo) => {
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (info.offset.x < -80) {
       goNext();
     } else if (info.offset.x > 80) {
@@ -175,10 +164,21 @@ export function ProjectDeck() {
 
   return (
     <div className="flex flex-col items-center justify-center py-10">
-      <div className="relative w-full max-w-[600px] h-[380px] overflow-hidden">
-        <div className="absolute top-[-30px] right-0 font-mono text-[10px] tracking-[0.2em] text-[var(--muted)]">
+      <div className="mb-3 flex w-full max-w-[600px] items-center justify-between font-mono text-[10px] tracking-[0.2em] text-[var(--muted)]">
+        <AnimatePresence>
+          {showHint ? (
+            <motion.span key="hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              ← swipe →
+            </motion.span>
+          ) : (
+            <span key="blank" />
+          )}
+        </AnimatePresence>
+        <span aria-live="polite">
           {String(index + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-        </div>
+        </span>
+      </div>
+      <div className="relative w-full max-w-[600px] h-[420px] overflow-hidden">
 
         <AnimatePresence initial={false} custom={direction}>
           {visibleCards.map((c, i) => (
@@ -200,25 +200,13 @@ export function ProjectDeck() {
           ))}
         </AnimatePresence>
 
-        <AnimatePresence>
-          {showHint && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute top-[-30px] left-0 font-mono text-[10px] tracking-[0.2em] text-[var(--muted)] pointer-events-none"
-            >
-              ← swipe →
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
 
-      <div className="mt-20 flex gap-8 items-center font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)]">
-        <button onClick={goPrev} className="hover:text-[var(--accent)] transition-colors py-2 px-4 border border-transparent hover:border-[var(--rule)]">
+      <div className="mt-10 flex gap-8 items-center font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)]">
+        <button type="button" aria-label="Previous project" onClick={goPrev} className="hover:text-[var(--accent)] transition-colors py-2 px-4 border border-transparent hover:border-[var(--rule)]">
           ← PREV
         </button>
-        <button onClick={goNext} className="hover:text-[var(--accent)] transition-colors py-2 px-4 border border-transparent hover:border-[var(--rule)]">
+        <button type="button" aria-label="Next project" onClick={goNext} className="hover:text-[var(--accent)] transition-colors py-2 px-4 border border-transparent hover:border-[var(--rule)]">
           NEXT →
         </button>
       </div>

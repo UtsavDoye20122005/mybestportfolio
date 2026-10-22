@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /secret
 
-Sitemap: https://utsav.dev/sitemap.xml
-
+Sitemap: https://mybestportfolio-5zua.vercel.app/sitemap.xml

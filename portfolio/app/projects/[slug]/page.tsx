@@ -1,17 +1,27 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getProjectBySlug, projects } from "../../../data/projects";
+import { PrivateBadge, ProjectLinks } from "../../components/ProjectLinks";
 import { ProjectClientWrapper } from "./ProjectClientWrapper";
+
+type Params = Promise<{ slug: string }>;
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
 }
 
-export default function ProjectCaseStudyPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const project = getProjectBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+  if (!project) return { title: "Project not found" };
+  return { title: `${project.title} · Utsav Doye`, description: project.oneLiner };
+}
+
+export default async function ProjectCaseStudyPage({ params }: { params: Params }) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     return (
@@ -50,8 +60,13 @@ export default function ProjectCaseStudyPage({
 
           <div className="shrink-0 text-right" data-reveal>
             <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-[var(--muted)]">
-              {project.issueNumber}
+              {project.issueNumber} · {project.category}
             </p>
+            {project.isPrivate && (
+              <div className="mt-3">
+                <PrivateBadge />
+              </div>
+            )}
           </div>
         </div>
 
@@ -114,24 +129,7 @@ export default function ProjectCaseStudyPage({
             <span className="text-[var(--accent)]">←</span>&nbsp;BACK TO PROJECTS
           </Link>
 
-          <div className="flex items-center gap-6">
-            <a
-              href={project.githubUrl}
-              className="inline-flex font-mono text-xs uppercase tracking-[0.28em] text-[var(--muted)] hover:text-[var(--fg)]"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GITHUB ↑
-            </a>
-            <a
-              href={project.liveUrl}
-              className="inline-flex font-mono text-xs uppercase tracking-[0.28em] text-[var(--fg)]"
-              target="_blank"
-              rel="noreferrer"
-            >
-              VIEW LIVE <span className="text-[var(--accent)]">↑</span>
-            </a>
-          </div>
+          <ProjectLinks project={project} className="sm:items-end sm:text-right" />
         </div>
       </ProjectClientWrapper>
     </section>

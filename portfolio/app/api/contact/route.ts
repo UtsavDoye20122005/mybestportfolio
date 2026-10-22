@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       await transporter.sendMail({
         from: resolveMailFromAddress(contactEmail),
         to: contactEmail,
-        subject: `[${submission.typeLabel}] from ${submission.name} - utsav.dev`,
+        subject: `[${submission.typeLabel}] from ${submission.name} - portfolio`,
         text: buildContactEmailLines(submission).join("\n"),
       });
       emailDelivered = true;

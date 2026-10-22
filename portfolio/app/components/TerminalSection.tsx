@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { featuredProjects, projects } from "../../data/projects";
 
 type Line = { id: number; kind: "prompt" | "output"; text: string };
 
@@ -32,9 +33,10 @@ function formatSkillsTree() {
 function formatProjectsList() {
   return [
     "projects",
-    "1) signal-lab — low-latency alerts + analytics dashboard",
-    "2) ops-console — internal tooling for triage and automation",
-    "3) quant-notes — research tracker for strategies + backtests",
+    ...featuredProjects.map(
+      (p, i) => `${i + 1}) ${p.slug}${p.isPrivate ? " [private]" : ""} — ${p.oneLiner.split(/[.—]/)[0].trim().toLowerCase()}`
+    ),
+    `→ all ${projects.length} projects at /projects`,
   ];
 }
 
@@ -73,7 +75,7 @@ export function TerminalSection() {
 
   useEffect(() => {
     // Auto-type welcome message on load.
-    const msg = "Welcome to utsav.dev — type 'help' to see available commands.";
+    const msg = "Welcome to Utsav's terminal — type 'help' to see available commands.";
     let i = 0;
     let timer: number | null = null;
     const nextId = { v: 1 };

@@ -2,11 +2,12 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { GITHUB_USERNAME } from "../../data/profile";
+import { projects } from "../../data/projects";
 import { useGithubContributions } from "./useGithubContributions";
 
 const stats = [
-  { value: "1", suffix: "", label: "years of building" },
-  { value: "5", suffix: "", label: "projects shipped" },
+  { value: "1", suffix: "+", label: "years of building" },
+  { value: String(projects.filter((p) => p.liveUrl || p.isPrivate).length), suffix: "", label: "projects shipped" },
   { value: "A lot", suffix: "", label: "bugs fixed, trust me" },
   { value: "420", suffix: "", label: "GitHub contributions" },
 ];
@@ -129,7 +130,7 @@ export function ByTheNumbers() {
       </div>
 
       <p className="mt-4 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--muted)]">
-        Hardcoded stats with GitHub contributions synced from <span className="text-[var(--fg)]">@{GITHUB_USERNAME}</span> · TODO: fix live API fallback
+        GitHub contributions synced from <span className="text-[var(--fg)]">@{GITHUB_USERNAME}</span>
       </p>
     </section>
   );
