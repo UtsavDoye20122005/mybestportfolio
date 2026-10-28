@@ -3,6 +3,7 @@ import { createMailTransport, resolveMailFromAddress } from "@/lib/contact/mail"
 import { buildContactEmailLines, buildContactSubmission, validateContactPayload } from "@/lib/contact/service";
 import { appendContactSubmission } from "@/lib/contact/storage";
 import type { ContactPayload } from "@/lib/contact/types";
+import { buildContactEmailHtml, buildContactEmailSubject } from "@/lib/contact/emailTemplate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -38,10 +39,12 @@ export async function POST(request: Request) {
   try {
     if (contactEmail && transporter) {
       await transporter.sendMail({
-        from: resolveMailFromAddress(contactEmail),
+        from: { name: "Portfolio", address: resolveMailFromAddress(contactEmail) },
         to: contactEmail,
-        subject: `[${submission.typeLabel}] from ${submission.name} - portfolio`,
+        replyTo: { name: submission.name, address: submission.email },
+        subject: buildContactEmailSubject(submission),
         text: buildContactEmailLines(submission).join("\n"),
+        html: buildContactEmailHtml(submission),
       });
       emailDelivered = true;
     }

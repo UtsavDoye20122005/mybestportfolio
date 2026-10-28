@@ -313,7 +313,7 @@ export async function buildContactSubmission(payload: ContactPayload, request: R
 export function buildContactEmailLines(submission: ContactSubmission) {
   const lines = [
     "-----------------------------",
-    "NEW MESSAGE - UTSAV.DEV",
+    "NEW MESSAGE - PORTFOLIO",
     "-----------------------------",
     `TYPE:      ${submission.typeLabel}`,
     `PRIORITY:  ${submission.segmentation.priority.toUpperCase()}`,
